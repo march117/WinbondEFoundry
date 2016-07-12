@@ -8,6 +8,7 @@ using DbModel.Helper;
 
 namespace WinbondEFoundry.Controllers
 {
+    [Authorize]
     public abstract class BaseController<T> : Controller where T: class
     {
         // GET: /Groups/
