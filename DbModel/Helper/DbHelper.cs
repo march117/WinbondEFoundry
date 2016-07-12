@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Collections.Generic;
+using DbModel.Util;
+using System.Data.Entity.Validation;
 
 namespace DbModel.Helper
 {
@@ -18,11 +20,35 @@ namespace DbModel.Helper
         /// <param name="model">新增的資料</param>
         public static void Insert<T>(T model) where T : class
         {
-            using (DbEntities db = new DbEntities())
+            using (DbContext db = new EFoundryContext())
             {
                 DbSet dbSet = GetDbSet<T>(db);
+                Type modelType = typeof(T);
+
+                #region 將指定欄位進行加密
+
+                List<string> memberName = modelType.GetMembers().Select(o=>o.Name).ToList();
+                List<string> encryptCols = EncryptColumns();
+                if (encryptCols.Any(o=>memberName.Contains(o)))
+                {
+                    foreach (string col in encryptCols.Where(o=>memberName.Contains(o)))
+                    {
+                        MethodInfo getPwd = modelType.GetMethod("get_"+col);
+                        string pwd = (string)getPwd.Invoke(model, null);
+                        if (!string.IsNullOrEmpty(pwd))
+                        {
+                            string encryptPwd = SecureUtil.Encrypt(pwd);
+                            MethodInfo setPwd = modelType.GetMethod("set_" + col);
+                            setPwd.Invoke(model, new object[] { encryptPwd });
+                        }
+                    }
+                }
+
+                #endregion
+
                 dbSet.Add(model);
                 db.SaveChanges();
+                
             }
         }
 
@@ -36,8 +62,8 @@ namespace DbModel.Helper
         /// <typeparam name="T">Entity物件</typeparam>
         /// <param name="model">更新資料</param>
         public static void Update<T>(T model)where T : class
-        {            
-            using (DbEntities db = new DbEntities())
+        {
+            using (DbContext db = new EFoundryContext())
             {
                 Type modelType = typeof(T);
                 DbSet<T> dbSet = GetDbSet<T>(db);
@@ -99,7 +125,7 @@ namespace DbModel.Helper
         /// <param name="id">Primary Key</param>
         public static void Delete<T>(string[] id)where T : class
         {
-            using (DbEntities db = new DbEntities())
+            using (DbContext db = new EFoundryContext())
             {
                 MethodInfo method = typeof(DbEntities).GetMethod("get_"+typeof(T).Name);
                 DbSet<T> dbSet = GetDbSet<T>(db);
@@ -130,7 +156,7 @@ namespace DbModel.Helper
         public static T GetItem<T>(string id) where T:class
         {
             T item = null;
-            using (DbEntities db = new DbEntities())
+            using (DbContext db = new EFoundryContext())
             {
                 Type modelType = typeof(T);
                 DbSet<T> dbSet = GetDbSet<T>(db);
@@ -172,8 +198,8 @@ namespace DbModel.Helper
         /// <returns>分頁列表</returns>
         public static List<T> GetList<T>(int pageIdx = 0,int pageSize = 0) where T: class{
             List<T> list = null;
-            
-            using (DbEntities db = new DbEntities())
+
+            using (DbContext db = new EFoundryContext())
             {
                 DbSet<T> dbSet = GetDbSet<T>(db);
                 IQueryable<T> qry = dbSet.AsQueryable();
@@ -191,6 +217,7 @@ namespace DbModel.Helper
         }
 
         #endregion
+
         #region Private Function
 
         static string GetPKColumnName(Type modelType)
@@ -217,13 +244,22 @@ namespace DbModel.Helper
             return keyVal;
         }
 
-        static DbSet<T> GetDbSet<T>(DbEntities db) where T : class{
+        static DbSet<T> GetDbSet<T>(DbContext db) where T : class{
             MethodInfo method = typeof(DbEntities).GetMethod("get_"+typeof(T).Name);
             if(method != null){
                 return (DbSet<T>)method.Invoke(db,null);
             }
             return null;
             
+        }
+
+
+        static List<string> EncryptColumns()
+        {
+            List<string> cols = new List<string>();
+            cols.Add("UserPwd");
+            cols.Add("CheckPw");
+            return cols;
         }
 
         #endregion

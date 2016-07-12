@@ -59,7 +59,7 @@ namespace WinbondEFoundry.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteItem(int[] id)
+        public ActionResult DeleteItem(string[] id)
         {
             DbHelper.Delete<T>(id);
             return RedirectToAction("Index");

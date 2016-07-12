@@ -17,7 +17,8 @@ namespace DbModel.Util
             string encrypt = string.Empty;
             
             using(DbEntities db = new DbEntities()){
-                encrypt = db.Database.SqlQuery<string>("select encryptPWD(@key,@str)", key, str).FirstOrDefault();
+                
+                encrypt = db.Database.SqlQuery<string>("select dbo.encryptPWD( {0} , {1} )", "Thesys@123", str).FirstOrDefault();
             }
 
             return encrypt;
@@ -35,7 +36,7 @@ namespace DbModel.Util
 
             using (DbEntities db = new DbEntities())
             {
-                decrypt = db.Database.SqlQuery<string>("select decryptPWD(@key,@str)", key, str).FirstOrDefault();
+                decrypt = db.Database.SqlQuery<string>("select dbo.decryptPWD({0},{1})", key, str).FirstOrDefault();
             }
 
             return decrypt;

@@ -12,3 +12,5 @@ C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFou
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Newtonsoft.Json.xml
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\obj\Debug\WinbondEFoundry.dll
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\obj\Debug\WinbondEFoundry.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Library.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Library.pdb

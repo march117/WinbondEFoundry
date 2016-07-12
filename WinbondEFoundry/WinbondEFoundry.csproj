@@ -73,6 +73,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,6 +165,10 @@
       <Project>{D381A758-30AB-4261-A5F8-6EEA7305A343}</Project>
       <Name>DbModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{371045D1-BE1E-4056-9255-3E43FCB90987}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Company\_Form.cshtml" />
@@ -188,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserProfile\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

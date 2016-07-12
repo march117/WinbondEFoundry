@@ -26,10 +26,10 @@ namespace DbModel
         [DisplayName("公司流水號"), Required]
         public long CompanyNo { get; set; }
 
-        [DisplayName("密碼"), Required]
+        [DisplayName("密碼"), Required,DataType(DataType.Password)]
         public string UserPwd { get; set; }
 
-        [DisplayName("確認密碼"), Required, Compare("UserPwd")]
+        [DisplayName("確認密碼"), Required,DataType(DataType.Password), Compare("UserPwd")]
         public string CheckPw { get; set; }
 
         [DisplayName("是否啟用"), Required]
