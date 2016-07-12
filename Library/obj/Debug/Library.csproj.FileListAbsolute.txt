@@ -1,0 +1,9 @@
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\Library.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\Library.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\DbModel.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\EntityFramework.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\DbModel.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\EntityFramework.xml
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.pdb

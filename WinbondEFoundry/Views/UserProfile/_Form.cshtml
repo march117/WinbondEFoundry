@@ -1,0 +1,73 @@
+﻿@using DbModel
+@model UserProfile
+@{
+    ViewBag.Title = "_Form";
+    string action = (string)ViewContext.RouteData.Values["action"];    
+}
+@ViewBag.IsValid
+<form method="post" action="@Url.Action(action)">
+    @if (action == "Edit")
+    {
+        @Html.HiddenFor(o => o.CompanyNo);
+    }
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o=>o.UserEmail)</td>
+            <td>@Html.TextBoxFor(o => o.UserEmail)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.UserPwd)</td>
+            <td>@Html.PasswordFor(o => o.UserPwd)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CheckPw)</td>
+            <td>@Html.PasswordFor(o => o.CheckPw)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CompanyNo)</td>
+            <td>
+                <select name="CompanyNo">
+                    @foreach (SelectListItem sl in ViewBag.CompanyList)
+                    {
+                        <option value="@sl.Value">@sl.Text</option>
+                    }
+                </select>                
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.ContraceNo)</td>
+            <td>@Html.TextBoxFor(o => o.ContraceNo)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.Contractor)</td>
+            <td>@Html.TextBoxFor(o => o.Contractor)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.ExpireDate)</td>
+            <td>@Html.TextBoxFor(o => o.ExpireDate, new { @type="date"})</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.PhoneNo)</td>
+            <td>@Html.TextBoxFor(o => o.PhoneNo)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.IsInternal)</td>
+            <td>@Html.CheckBoxFor(o => o.IsInternal)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.IsActive)</td>
+            <td>@Html.CheckBoxFor(o => o.IsActive)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.Status)</td>
+            <td>@Html.TextBoxFor(o => o.Status)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.Creater)</td>
+            <td>@Html.TextBoxFor(o => o.Creater)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="send" /></td>
+        </tr>
+    </table>    
+</form>

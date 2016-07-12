@@ -1,0 +1,14 @@
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\obj\Debug\WinbondEFoundry.csprojResolveAssemblyReference.cache
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\WinbondEFoundry.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\WinbondEFoundry.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\DbModel.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\EntityFramework.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\EntityFramework.SqlServer.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Newtonsoft.Json.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\DbModel.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\EntityFramework.xml
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\EntityFramework.SqlServer.xml
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Newtonsoft.Json.pdb
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\bin\Newtonsoft.Json.xml
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\obj\Debug\WinbondEFoundry.dll
+C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\WinbondEFoundry\obj\Debug\WinbondEFoundry.pdb

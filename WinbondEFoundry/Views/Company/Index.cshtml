@@ -1,0 +1,17 @@
+﻿@using DbModel
+@model List<CompanyProfile>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<form action="@Url.Action("DeleteItem")" method="post">
+    <ul>
+        @foreach (CompanyProfile c in Model)
+        {        
+            <li><input type="checkbox" value="@c.CompanyNo" name="id" /><a href="@Url.Action("Edit", new { @id=c.CompanyNo})">@c.CompanyName</a></li>
+        }
+    </ul>
+    <input type="submit" value="Submit" />
+</form>
+

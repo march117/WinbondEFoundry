@@ -1,0 +1,34 @@
+﻿@using DbModel
+@model CompanyProfile
+@{
+    ViewBag.Title = "_Form";
+    string action = (string)ViewContext.RouteData.Values["action"];    
+}
+@ViewBag.Model
+<form method="post" action="@Url.Action(action)">
+    @if (action == "Edit")
+    {
+        @Html.HiddenFor(o => o.CompanyNo);
+    }
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CompanyName)</td>
+            <td>@Html.TextBoxFor(o => o.CompanyName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CompanyAddr)</td>
+            <td>@Html.TextAreaFor(o => o.CompanyAddr)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CompanyTel)</td>
+            <td>@Html.TextBoxFor(o => o.CompanyTel)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.DomainName)</td>
+            <td>@Html.TextBoxFor(o => o.DomainName)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="send" /></td>
+        </tr>
+    </table>    
+</form>

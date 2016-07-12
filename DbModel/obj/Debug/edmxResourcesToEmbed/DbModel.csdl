@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CompanyIPList" EntityType="DbModel.CompanyIPList" />
+    <EntitySet Name="CompanyProfile" EntityType="DbModel.CompanyProfile" />
+    <EntitySet Name="DocumentAttr" EntityType="DbModel.DocumentAttr" />
+    <EntitySet Name="DocumentMainCategory" EntityType="DbModel.DocumentMainCategory" />
+    <EntitySet Name="Documents" EntityType="DbModel.Documents" />
+    <EntitySet Name="DocumentSubCategory" EntityType="DbModel.DocumentSubCategory" />
+    <EntitySet Name="DocumentsWithSubCategory" EntityType="DbModel.DocumentsWithSubCategory" />
+    <EntitySet Name="DocumentWithAttr" EntityType="DbModel.DocumentWithAttr" />
+    <EntitySet Name="DownloadHistory" EntityType="DbModel.DownloadHistory" />
+    <EntitySet Name="Groups" EntityType="DbModel.Groups" />
+    <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
+    <EntitySet Name="NDAs" EntityType="DbModel.NDAs" />
+    <EntitySet Name="NDAUpdateLog" EntityType="DbModel.NDAUpdateLog" />
+    <EntitySet Name="Project" EntityType="DbModel.Project" />
+    <EntitySet Name="ProjectAndUsers" EntityType="DbModel.ProjectAndUsers" />
+    <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
+    <EntitySet Name="UserAndFunction" EntityType="DbModel.UserAndFunction" />
+    <EntitySet Name="WinbondGroupAndFuntion" EntityType="DbModel.WinbondGroupAndFuntion" />
+    <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.WinbondUserAndGroup" />
+    <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.WinbondUserAndProject" />
+    <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
+    <EntitySet Name="UserProfile" EntityType="DbModel.UserProfile" />
+  </EntityContainer>
+  <EntityType Name="CompanyIPList">
+    <Key>
+      <PropertyRef Name="CompanyNo" />
+      <PropertyRef Name="Ip" />
+    </Key>
+    <Property Name="CompanyNo" Type="Int64" Nullable="false" />
+    <Property Name="Ip" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="CompanyProfile">
+    <Key>
+      <PropertyRef Name="CompanyNo" />
+    </Key>
+    <Property Name="CompanyNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CompanyTel" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CompanyAddr" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="DomainName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="DocumentAttr">
+    <Key>
+      <PropertyRef Name="AttributeNo" />
+    </Key>
+    <Property Name="AttributeNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="Int64" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentMainCategory">
+    <Key>
+      <PropertyRef Name="MainCategoryNo" />
+    </Key>
+    <Property Name="MainCategoryNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MainCategoryName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="GUID" />
+    </Key>
+    <Property Name="GUID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DocNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocTitle" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Version" Type="Double" Nullable="false" />
+    <Property Name="EffDate" Type="DateTime" Nullable="false" />
+    <Property Name="FileName" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="FileSize" Type="Int64" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="DocumentSubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubCategoryName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="Int64" />
+    <Property Name="CategoryNo" Type="Int64" Nullable="false" />
+    <Property Name="ParentNo" Type="Int64" />
+  </EntityType>
+  <EntityType Name="DocumentsWithSubCategory">
+    <Key>
+      <PropertyRef Name="GUID" />
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="GUID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="SubCategoryId" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentWithAttr">
+    <Key>
+      <PropertyRef Name="AttributeNo" />
+    </Key>
+    <Property Name="AttributeNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GUID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="DownloadHistory">
+    <Key>
+      <PropertyRef Name="DownloadNo" />
+    </Key>
+    <Property Name="DownloadNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsUpdateNotify" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="ResultCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Result" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="SourceIP" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="GUID" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupNo" />
+    </Key>
+    <Property Name="GroupNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MainFunction">
+    <Key>
+      <PropertyRef Name="FunctionNo" />
+    </Key>
+    <Property Name="FunctionNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FunctionName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NDAs">
+    <Key>
+      <PropertyRef Name="NDAId" />
+    </Key>
+    <Property Name="NDAId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="NDANo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NDAName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" />
+    <Property Name="CompanyNo" Type="Int64" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="NDAUpdateLog">
+    <Key>
+      <PropertyRef Name="NDAId" />
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="NDAId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="NDANo" Type="Int64" Nullable="false" />
+    <Property Name="NDAName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ProjectNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="NDAId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ProjectAndUsers">
+    <Key>
+      <PropertyRef Name="PAUId" />
+    </Key>
+    <Property Name="PAUId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" />
+    <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+    <Property Name="InProjectStatus" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="SubFunction">
+    <Key>
+      <PropertyRef Name="SubFunctionNo" />
+    </Key>
+    <Property Name="SubFunctionNo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubFunctionName" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="MainFunctionNo" Type="Int64" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAndFunction">
+    <Key>
+      <PropertyRef Name="SubFuntionNo" />
+      <PropertyRef Name="UserEmail" />
+    </Key>
+    <Property Name="SubFuntionNo" Type="Int64" Nullable="false" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="CreaterEmail" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WinbondGroupAndFuntion">
+    <Key>
+      <PropertyRef Name="SubFuntionNo" />
+      <PropertyRef Name="GroupNo" />
+    </Key>
+    <Property Name="SubFuntionNo" Type="Int64" Nullable="false" />
+    <Property Name="GroupNo" Type="Int64" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WinbondUserAndGroup">
+    <Key>
+      <PropertyRef Name="GroupNo" />
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="GroupNo" Type="Int64" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WinbondUserAndProject">
+    <Key>
+      <PropertyRef Name="ADAcount" />
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ADAcount" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="ProjectId" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Createdate" Type="DateTime" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WinbondUsers">
+    <Key>
+      <PropertyRef Name="ADAcount" />
+    </Key>
+    <Property Name="ADAcount" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserEmail" />
+    </Key>
+    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="CompanyNo" Nullable="false" />
+    <Property Type="String" Name="UserPwd" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="Creater" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="LastLoginDate" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdate" />
+    <Property Type="String" Name="ExtensinNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PhoneNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsInternal" Nullable="false" />
+    <Property Type="String" Name="ContraceNo" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ExpireDate" />
+    <Property Type="String" Name="Contractor" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,26 @@
+﻿@using DbModel
+@model Groups
+@{
+    ViewBag.Title = "_Form";
+    string action = (string)ViewContext.RouteData.Values["action"];    
+}
+@ViewBag.Model
+<form method="post" action="@Url.Action(action)">
+    @if (action == "Edit")
+    {
+        @Html.HiddenFor(o => o.GroupNo);
+    }
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o=>o.GroupName)</td>
+            <td>@Html.TextBoxFor(o=>o.GroupName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.IsActive)</td>
+            <td>@Html.CheckBoxFor(o => o.IsActive)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="send" /></td>
+        </tr>
+    </table>    
+</form>

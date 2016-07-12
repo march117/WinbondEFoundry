@@ -1,0 +1,17 @@
+﻿@using DbModel
+@model List<Groups>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<form action="@Url.Action("DeleteItem")" method="post">
+    <ul>
+        @foreach (Groups g in Model)
+        {        
+            <li><input type="checkbox" value="@g.GroupNo" name="id" /><a href="@Url.Action("Edit", new { @id=g.GroupNo})">@g.GroupName</a></li>
+        }
+    </ul>
+    <input type="submit" value="Submit" />
+</form>
+
