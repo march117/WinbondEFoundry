@@ -17,6 +17,6 @@ namespace DbModel
         public long GroupId { get; set; }
         public string GroupName { get; set; }
         public bool IsActive { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }

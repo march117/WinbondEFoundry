@@ -10,6 +10,7 @@
     {
         @Html.HiddenFor(o => o.GroupId);
     }
+    @Html.HiddenFor(o => o.CreateDate, new {@Value = DateTime.Now })
     <table>
         <tr>
             <td>@Html.LabelFor(o=>o.GroupName)</td>

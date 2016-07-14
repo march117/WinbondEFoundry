@@ -16,7 +16,7 @@ namespace DbModel
     {
         public long MainCategoryId { get; set; }
         public string MainCategoryName { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public bool IsActive { get; set; }
     }

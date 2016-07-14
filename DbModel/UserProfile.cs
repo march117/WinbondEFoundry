@@ -21,7 +21,7 @@ namespace DbModel
         public bool IsActive { get; set; }
         public string Creater { get; set; }
         public Nullable<System.DateTime> LastLoginDate { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public string ExtensinNo { get; set; }
         public string PhoneNo { get; set; }

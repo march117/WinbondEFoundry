@@ -16,7 +16,7 @@ namespace DbModel
     {
         public long AttributeId { get; set; }
         public string GUID { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     }
 }

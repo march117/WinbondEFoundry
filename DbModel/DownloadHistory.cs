@@ -20,7 +20,7 @@ namespace DbModel
         public string Result { get; set; }
         public string SourceIP { get; set; }
         public string UserId { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public string GUID { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace DbModel
         public long MainFunctionId { get; set; }
         public Nullable<long> ParentFunctionId { get; set; }
         public string SubFunctionName { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public bool IsActive { get; set; }
     }
 }

@@ -65,20 +65,21 @@ namespace DbModel.Helper
         {
             using (DbContext db = new EFoundryContext())
             {
-                Type modelType = typeof(T);
-                DbSet<T> dbSet = GetDbSet<T>(db);
-                object keyVal = GetPKColumnValue<T>(model);                
-                T old = dbSet.Find(keyVal);
-                //避免Create Date被覆寫
-                MethodInfo getCreateDt = typeof(T).GetMethod("get_CreateDate");
-                DateTime oldDt = (DateTime)getCreateDt.Invoke(old, null);
-                if (oldDt != null)
-                {
-                    MethodInfo setCreateDt = typeof(T).GetMethod("set_CreateDate");
-                    setCreateDt.Invoke(model, new object[]{oldDt});
-                }
+                //Type modelType = typeof(T);
+                //DbSet<T> dbSet = GetDbSet<T>(db);
+                //object keyVal = GetPKColumnValue<T>(model);                
+                //T old = dbSet.Find(keyVal);
+                ////避免Create Date被覆寫
+                //MethodInfo getCreateDt = typeof(T).GetMethod("get_CreateDate");
+                //DateTime oldDt = (DateTime)getCreateDt.Invoke(old, null);
+                //if (oldDt != null)
+                //{
+                //    MethodInfo setCreateDt = typeof(T).GetMethod("set_CreateDate");
+                //    setCreateDt.Invoke(model, new object[]{oldDt});
+                //}
 
-                db.Entry(old).CurrentValues.SetValues(model);                
+                //db.Entry(old).CurrentValues.SetValues(model);                
+                db.Entry(model).State = EntityState.Modified;
 
                 db.SaveChanges();
             }
@@ -248,6 +249,11 @@ namespace DbModel.Helper
 
         #region Private Function
 
+        /// <summary>
+        /// 取得主鍵欄位名稱
+        /// </summary>
+        /// <param name="modelType">Model Type</param>
+        /// <returns>欄位名稱</returns>
         static string GetPKColumnName(Type modelType)
         {            
             Type metadataType = Type.GetType("DbModel." + modelType.Name + "MD");
@@ -264,6 +270,12 @@ namespace DbModel.Helper
             return keyCol;
         }
 
+        /// <summary>
+        /// 取得主鍵欄位值
+        /// </summary>
+        /// <typeparam name="T">Entity物件型別</typeparam>
+        /// <param name="model">Entity物件</param>
+        /// <returns>主鍵值</returns>
         static object GetPKColumnValue<T>(T model) where T : class
         {
             Type modelType = typeof(T);
@@ -272,6 +284,12 @@ namespace DbModel.Helper
             return keyVal;
         }
 
+        /// <summary>
+        /// 取得DbSet物件
+        /// </summary>
+        /// <typeparam name="T">Entity物件型別</typeparam>
+        /// <param name="db">DbContext</param>
+        /// <returns>DbSet</returns>
         static DbSet<T> GetDbSet<T>(DbContext db) where T : class{
             MethodInfo method = typeof(DbEntities).GetMethod("get_"+typeof(T).Name);
             if(method != null){
@@ -281,7 +299,10 @@ namespace DbModel.Helper
             
         }
 
-
+        /// <summary>
+        /// 需要加密的欄位
+        /// </summary>
+        /// <returns></returns>
         static List<string> EncryptColumns()
         {
             List<string> cols = new List<string>();

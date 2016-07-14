@@ -45,7 +45,7 @@ namespace DbModel
         public Nullable<System.DateTime> LastLoginDate { get; set; }
 
         [DisplayName("建立時間"), Required]
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
 
         [DisplayName("最後更新時間")]
         public Nullable<System.DateTime> LastUpdate { get; set; }

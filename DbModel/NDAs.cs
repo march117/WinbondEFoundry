@@ -20,7 +20,7 @@ namespace DbModel
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public string CompanyNo { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
     }
 }

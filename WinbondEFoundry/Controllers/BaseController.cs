@@ -49,10 +49,11 @@ namespace WinbondEFoundry.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(T g)
+        public ActionResult Edit([Bind(Exclude = "CreateDate,Creater,Password")]T g)
         {
             if (ModelState.IsValid)
             {
+                
                 DbHelper.Update<T>(g);
             }            
             ResourceToEditView();

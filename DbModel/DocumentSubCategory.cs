@@ -16,7 +16,7 @@ namespace DbModel
     {
         public long SubCategoryId { get; set; }
         public string SubCategoryName { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<long> LastUpdate { get; set; }
         public long CategoryNo { get; set; }
         public Nullable<long> ParentNo { get; set; }

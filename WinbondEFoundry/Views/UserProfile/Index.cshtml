@@ -9,7 +9,10 @@
     <ul>
         @foreach (UserProfile u in Model)
         {        
-            <li><input type="checkbox" value="@u.UserEmail" name="id" /><a href="@Url.Action("Edit", new { @id=u.UserEmail})">@u.UserEmail</a></li>
+            <li>
+                <input type="checkbox" value="@u.UserId" name="id" /><a href="@Url.Action("Edit", new { @id = u.UserId })">@u.UserEmail</a>&nbsp;
+                <a href="@Url.Action("UserAndFunction", new {@id = u.UserId }))">編輯Project權限</a>
+            </li>
         }
     </ul>
     <input type="submit" value="Submit" />

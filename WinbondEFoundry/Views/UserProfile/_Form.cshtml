@@ -2,7 +2,7 @@
 @model UserProfile
 @{
     ViewBag.Title = "_Form";
-    string action = (string)ViewContext.RouteData.Values["action"];    
+    string action = (string)ViewContext.RouteData.Values["action"];
     UserProfile user = (UserProfile)ViewBag.UserProfile;
 }
 @ViewBag.IsValid
@@ -11,49 +11,53 @@
     {
         @Html.HiddenFor(o => o.CompanyNo);
     }
-    @Html.HiddenFor(o => o.Creater, new {@Value =  user.UserId})
+    @Html.HiddenFor(o => o.Creater, new { @Value = user.UserId })
+    @Html.HiddenFor(o => o.CreateDate, new { @Value = DateTime.Now })
     <table>
         <tr>
-            <td>@Html.LabelFor(o=>o.UserEmail)</td>
+            <td>@Html.LabelFor(o => o.UserEmail)</td>
             <td>@Html.TextBoxFor(o => o.UserEmail)</td>
         </tr>
+        @if (action != "Edit")
+        {
+            <tr>
+                <td>@Html.LabelFor(o => o.UserPwd)</td>
+                <td>@Html.PasswordFor(o => o.UserPwd)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(o => o.CheckPw)</td>
+                <td>@Html.PasswordFor(o => o.CheckPw)</td>
+            </tr>
+        }        
         <tr>
-            <td>@Html.LabelFor(o=>o.UserPwd)</td>
-            <td>@Html.PasswordFor(o => o.UserPwd)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(o=>o.CheckPw)</td>
-            <td>@Html.PasswordFor(o => o.CheckPw)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(o=>o.CompanyNo)</td>
+            <td>@Html.LabelFor(o => o.CompanyNo)</td>
             <td>
                 <select name="CompanyNo">
-                    @foreach (SelectListItem sl in ViewBag.CompanyList)
+                    @foreach (CompanyProfile c in ViewBag.CompanyList)
                     {
-                        <option value="@sl.Value">@sl.Text</option>
+                        <option value="@c.CompanyNo" @(Model != null && c.CompanyNo == Model.CompanyNo?"selected":"")>@c.CompanyName</option>
                     }
                 </select>                
             </td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(o=>o.ExpireDate)</td>
-            <td>@Html.TextBoxFor(o => o.ExpireDate, new { @type="date"})</td>
+            <td>@Html.LabelFor(o => o.ExpireDate)</td>
+            <td>@Html.TextBoxFor(o => o.ExpireDate, new { @type = "date" })</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(o=>o.PhoneNo)</td>
+            <td>@Html.LabelFor(o => o.PhoneNo)</td>
             <td>@Html.TextBoxFor(o => o.PhoneNo)</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(o=>o.ExtensinNo)</td>
+            <td>@Html.LabelFor(o => o.ExtensinNo)</td>
             <td>@Html.TextBoxFor(o => o.ExtensinNo)</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(o=>o.IsActive)</td>
-            <td>@Html.CheckBoxFor(o => o.IsActive, new { @checked = "checked"})</td>
+            <td>@Html.LabelFor(o => o.IsActive)</td>
+            <td>@Html.CheckBoxFor(o => o.IsActive, new { @checked = "checked" })</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(o=>o.Status)</td>
+            <td>@Html.LabelFor(o => o.Status)</td>
             <td>@Html.TextBoxFor(o => o.Status)</td>
         </tr>
         <tr>

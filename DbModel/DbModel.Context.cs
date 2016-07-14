@@ -44,10 +44,10 @@ namespace DbModel
         public DbSet<SubFunction> SubFunction { get; set; }
         public DbSet<tmp_documentGroupAndProject> tmp_documentGroupAndProject { get; set; }
         public DbSet<UserAndFunction> UserAndFunction { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<WinbondGroupAndFuntion> WinbondGroupAndFuntion { get; set; }
         public DbSet<WinbondUserAndGroup> WinbondUserAndGroup { get; set; }
         public DbSet<WinbondUserAndProject> WinbondUserAndProject { get; set; }
         public DbSet<WinbondUsers> WinbondUsers { get; set; }
-        public DbSet<UserProfile> UserProfile { get; set; }
     }
 }

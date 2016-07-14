@@ -16,7 +16,7 @@ namespace DbModel
     {
         public string ADAcount { get; set; }
         public string ProjectNo { get; set; }
-        public System.DateTime Createdate { get; set; }
+        public Nullable<System.DateTime> Createdate { get; set; }
         public string Status { get; set; }
     }
 }

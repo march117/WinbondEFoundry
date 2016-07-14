@@ -16,7 +16,7 @@ namespace DbModel
     {
         public long NDAId { get; set; }
         public string ProjectNo { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public long NDANo { get; set; }
         public string NDAName { get; set; }
     }

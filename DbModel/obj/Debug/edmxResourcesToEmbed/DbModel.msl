@@ -213,6 +213,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="UserProfile">
+      <EntityTypeMapping TypeName="DbModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="ExtensinNo" ColumnName="ExtensinNo" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="WinbondGroupAndFuntion">
       <EntityTypeMapping TypeName="DbModel.WinbondGroupAndFuntion">
         <MappingFragment StoreEntitySet="WinbondGroupAndFuntion">
@@ -249,25 +268,6 @@
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserProfile">
-      <EntityTypeMapping TypeName="DbModel.UserProfile">
-        <MappingFragment StoreEntitySet="UserProfile">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
-          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-          <ScalarProperty Name="ExtensinNo" ColumnName="ExtensinNo" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-          <ScalarProperty Name="Creater" ColumnName="Creater" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
-          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

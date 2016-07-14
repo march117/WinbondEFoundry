@@ -11,10 +11,7 @@ namespace DbModel
     [MetadataType(typeof(GroupsMD))]
     public partial class Groups
     {
-        public Groups(){
-            CreateDate = DateTime.Now;
-            IsActive = true;
-        }        
+  
     }
 
     public class GroupsMD
@@ -29,6 +26,6 @@ namespace DbModel
         public bool IsActive { get; set; }
 
         [DisplayName("建立時間"), Required, HiddenInput(DisplayValue = false)]
-        public System.DateTime CreateDate { get;set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }

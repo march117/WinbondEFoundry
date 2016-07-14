@@ -22,6 +22,7 @@
     {
         @Html.HiddenFor(o => o.SubFunctionId);
     }
+    @Html.HiddenFor(o=>o.CreateDate, new{@Value = DateTime.Now})
     <table>
         <tr>
             <td>@Html.LabelFor(o=>o.SubFunctionName)</td>

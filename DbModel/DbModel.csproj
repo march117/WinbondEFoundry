@@ -98,6 +98,7 @@
     <Compile Include="Metadata\CompanyIPListMD.cs" />
     <Compile Include="Metadata\CompanyProfileMD.cs" />
     <Compile Include="Metadata\GroupsMD.cs" />
+    <Compile Include="Metadata\ProjectMD.cs" />
     <Compile Include="Metadata\SubFunctionMD.cs" />
     <Compile Include="Metadata\UserProfileMD.cs" />
     <Compile Include="NDAs.cs">

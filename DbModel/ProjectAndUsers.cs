@@ -17,7 +17,7 @@ namespace DbModel
         public long PAUId { get; set; }
         public long UserId { get; set; }
         public string ProjectId { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public bool IsAdmin { get; set; }
         public string InProjectStatus { get; set; }

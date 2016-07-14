@@ -16,7 +16,7 @@ namespace DbModel
     {
         public long SubFuntionId { get; set; }
         public long GroupId { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public string Status { get; set; }
     }
 }

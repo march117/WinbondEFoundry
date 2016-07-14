@@ -12,12 +12,7 @@ namespace WinbondEFoundry.Controllers
     {
         public override void ResourceToEditView()
         {
-            ViewBag.CompanyList = DbHelper.GetList<CompanyProfile>()
-                                    .Select(o => new SelectListItem
-                                    {
-                                        Text = o.CompanyName,
-                                        Value = o.CompanyNo.ToString()
-                                    });
+            ViewBag.CompanyList = DbHelper.GetList<CompanyProfile>();
         }
 
         public override void ResourceToIndexView()
