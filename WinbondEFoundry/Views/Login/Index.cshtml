@@ -6,7 +6,10 @@
 
 <h2>登入</h2>
 @ViewBag.isLogin
+@ViewBag.UserProfile
 <form action="@Url.Action("Index")" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]"/>
     <table>
         <tr>
             <td>@Html.LabelFor(o=>o.UserEmail)</td>

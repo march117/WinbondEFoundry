@@ -20,6 +20,7 @@ namespace WinbondEFoundry.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(LoginVM lv)
         {
             if (ModelState.IsValid)
@@ -28,9 +29,16 @@ namespace WinbondEFoundry.Controllers
                 if (lh.Login())
                 {
                     string encrypt = lh.GetEncrptyTicket();                    
-                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName,encrypt));                    
+                    Response.AppendCookie(new HttpCookie(FormsAuthentication.FormsCookieName,encrypt));                    
                 }
                 ViewBag.isLogin = lh.Login();
+
+                //Return Url
+                string rURL = Request.QueryString["ReturnUrl"];
+                if (!string.IsNullOrEmpty(lv.ReturnUrl))
+                {
+                    return Redirect(lv.ReturnUrl);
+                }
             }            
             return View();
         }

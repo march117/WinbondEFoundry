@@ -14,5 +14,7 @@ namespace DbModel.ViewModel.Login
 
         [DisplayName("密碼"), Required]
         public string Password { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

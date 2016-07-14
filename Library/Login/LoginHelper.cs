@@ -72,14 +72,18 @@ namespace Library.Login
         /// </summary>
         private void CheckPW()
         {
-            string pwd = SecureUtil.Decrypt(_user.UserPwd);
-            isLogin =  pwd == _loginView.Password;
-
-            //登入失敗清除使用者
-            if (!isLogin)
+            if (_user != null)
             {
-                _user = null;
+                string pwd = SecureUtil.Decrypt(_user.UserPwd);
+                isLogin = pwd == _loginView.Password;
+
+                //登入失敗清除使用者
+                if (!isLogin)
+                {
+                    _user = null;
+                }
             }
+            
         }
 
         /// <summary>
