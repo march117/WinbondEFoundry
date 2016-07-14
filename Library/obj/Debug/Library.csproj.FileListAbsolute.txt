@@ -7,3 +7,5 @@ C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\bin
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.csprojResolveAssemblyReference.cache
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.dll
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\Library\obj\Debug\Library.pdb
+C:\Users\MArch\documents\visual studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\MArch\documents\visual studio 2010\Projects\WinbondEFoundry\Library\bin\Debug\Newtonsoft.Json.xml
