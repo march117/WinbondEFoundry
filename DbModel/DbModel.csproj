@@ -122,7 +122,7 @@
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Util\SecureUtil.cs" />
-    <Compile Include="ViewData\Login\LoginView.cs" />
+    <Compile Include="ViewModel\Login\LoginVM.cs" />
     <Compile Include="WinbondGroupAndFuntion.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
