@@ -39,8 +39,10 @@ namespace DbModel
         public DbSet<NDAs> NDAs { get; set; }
         public DbSet<NDAUpdateLog> NDAUpdateLog { get; set; }
         public DbSet<Project> Project { get; set; }
+        public DbSet<ProjectAndDocument> ProjectAndDocument { get; set; }
         public DbSet<ProjectAndUsers> ProjectAndUsers { get; set; }
         public DbSet<SubFunction> SubFunction { get; set; }
+        public DbSet<tmp_documentGroupAndProject> tmp_documentGroupAndProject { get; set; }
         public DbSet<UserAndFunction> UserAndFunction { get; set; }
         public DbSet<WinbondGroupAndFuntion> WinbondGroupAndFuntion { get; set; }
         public DbSet<WinbondUserAndGroup> WinbondUserAndGroup { get; set; }

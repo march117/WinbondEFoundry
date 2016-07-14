@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class DocumentAttr
     {
-        public long AttributeNo { get; set; }
+        public long AttributeId { get; set; }
         public string AttributeName { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<long> LastUpdate { get; set; }

@@ -20,7 +20,7 @@ namespace DbModel
     public class GroupsMD
     {
         [DisplayName("群組流水號"), Key, HiddenInput(DisplayValue = false)]
-        public long GroupNo { get;set; }
+        public long GroupId { get; set; }
 
         [DisplayName("群組名稱"), Required]
         public string GroupName { get; set; }

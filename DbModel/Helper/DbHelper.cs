@@ -175,6 +175,21 @@ namespace DbModel.Helper
             return item;
         }
 
+        /// <summary>
+        /// 取得單一物件
+        /// </summary>
+        /// <typeparam name="T">Entity物件</typeparam>
+        /// <param name="pre">Func條件</param>
+        /// <returns>物件</returns>
+        public static T GetItem<T>(Func<T, bool> pre) where T : class
+        {
+            using (EFoundryContext db = new EFoundryContext())
+            {
+                DbSet<T> dbSet = GetDbSet<T>(db);
+                return dbSet.FirstOrDefault(pre);
+            }            
+        }
+
         #endregion
 
         #region 取得列表
@@ -216,6 +231,19 @@ namespace DbModel.Helper
             return list;
         }
 
+        public static List<T> GetList<T>(params Func<T,bool>[] funcs) where T : class
+        {
+            using(EFoundryContext db = new EFoundryContext()){
+                DbSet<T> dbSet = GetDbSet<T>(db);
+                IEnumerable<T> qry = dbSet.AsEnumerable();         
+                foreach (Func<T, bool> func in funcs)
+                {
+                    qry = qry.Where(func);
+                }
+
+                return qry.ToList();
+            }
+        }
         #endregion
 
         #region Private Function

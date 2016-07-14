@@ -14,9 +14,10 @@ namespace DbModel
     
     public partial class SubFunction
     {
-        public long SubFunctionNo { get; set; }
+        public long SubFunctionId { get; set; }
+        public long MainFunctionId { get; set; }
+        public Nullable<long> ParentFunctionId { get; set; }
         public string SubFunctionName { get; set; }
-        public long MainFunctionNo { get; set; }
         public System.DateTime CreateDate { get; set; }
         public bool IsActive { get; set; }
     }

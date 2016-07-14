@@ -8,7 +8,7 @@
 <form method="post" action="@Url.Action(action)">
     @if (action == "Edit")
     {
-        @Html.HiddenFor(o => o.GroupNo);
+        @Html.HiddenFor(o => o.GroupId);
     }
     <table>
         <tr>
@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>@Html.LabelFor(o=>o.IsActive)</td>
-            <td>@Html.CheckBoxFor(o => o.IsActive)</td>
+            <td>@Html.CheckBoxFor(o => o.IsActive, new { @checked = "checked"})</td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="send" /></td>

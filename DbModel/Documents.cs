@@ -15,7 +15,7 @@ namespace DbModel
     public partial class Documents
     {
         public string GUID { get; set; }
-        public long DocNo { get; set; }
+        public string DocNo { get; set; }
         public string DocTitle { get; set; }
         public double Version { get; set; }
         public System.DateTime EffDate { get; set; }

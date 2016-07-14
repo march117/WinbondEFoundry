@@ -63,8 +63,11 @@ namespace Library.Login
         /// 取得User
         /// </summary>
         private void GetUser()
-        {           
-            _user = DbHelper.GetItem<UserProfile>(_loginView.UserEmail);
+        {
+            _user = DbHelper.GetItem<UserProfile>(delegate(UserProfile u)
+            {
+                return u.UserEmail == _loginView.UserEmail;
+            });
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class Groups
     {
-        public long GroupNo { get; set; }
+        public long GroupId { get; set; }
         public string GroupName { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime CreateDate { get; set; }

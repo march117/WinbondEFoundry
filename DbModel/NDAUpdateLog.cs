@@ -14,8 +14,8 @@ namespace DbModel
     
     public partial class NDAUpdateLog
     {
-        public string NDAId { get; set; }
-        public string ProjectId { get; set; }
+        public long NDAId { get; set; }
+        public string ProjectNo { get; set; }
         public System.DateTime CreateDate { get; set; }
         public long NDANo { get; set; }
         public string NDAName { get; set; }

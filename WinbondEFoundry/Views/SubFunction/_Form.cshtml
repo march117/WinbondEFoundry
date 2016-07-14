@@ -1,0 +1,58 @@
+﻿@using DbModel
+@model SubFunction
+@{    
+    ViewBag.Title = "_Form";
+    string action = (string)ViewContext.RouteData.Values["action"];    
+}
+@ViewBag.Model
+<script>
+    var changeMainFunc = function () {
+        $.ajax({
+            url: '/SubFunction/GetSubFunction',
+            type: 'post',
+            data:{MainFuncNo:$('select[name="MainFunctionNo"]').val()},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    };
+</script>
+<form method="post" action="@Url.Action(action)">
+    @if (action == "Edit")
+    {
+        @Html.HiddenFor(o => o.SubFunctionId);
+    }
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o=>o.SubFunctionName)</td>
+            <td>@Html.TextBoxFor(o => o.SubFunctionName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.MainFunctionId)</td>
+            <td>
+                <select name="MainFunctionId"  onchange="changeMainFunc()">
+                    <option value=''>請選擇</option>
+                    @foreach (MainFunction m in ViewBag.MainFunc)
+                    {
+                        <option value="@m.FunctionId" @(Model != null && m.FunctionId == Model.MainFunctionId ? "selected" : "")>@m.FunctionName</option>
+                    }
+                </select>
+             </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.ParentFunctionId)</td>
+            <td>
+                <select name="ParentNo">
+                    <option value=''>請選擇</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.IsActive)</td>
+            <td>@Html.CheckBoxFor(o => o.IsActive, new { @checked="checked"})</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="send" /></td>
+        </tr>
+    </table>    
+</form>

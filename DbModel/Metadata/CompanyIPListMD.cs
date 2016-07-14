@@ -13,10 +13,10 @@ namespace DbModel
         {
             [DisplayName("公司流水號")]
             [Required]
-            public global::System.Int64 CompanyNo { get; set; }
+            public string CompanyNo { get; set; }
             [DisplayName("IP")]
             [Required]
-            public global::System.String Ip { get; set; }
+            public string Ip { get; set; }
         }
     }
 }

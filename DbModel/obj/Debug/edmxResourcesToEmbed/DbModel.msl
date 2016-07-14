@@ -4,234 +4,251 @@
     <EntitySetMapping Name="CompanyIPList">
       <EntityTypeMapping TypeName="DbModel.CompanyIPList">
         <MappingFragment StoreEntitySet="CompanyIPList">
-          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
           <ScalarProperty Name="Ip" ColumnName="Ip" />
+          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CompanyProfile">
       <EntityTypeMapping TypeName="DbModel.CompanyProfile">
         <MappingFragment StoreEntitySet="CompanyProfile">
-          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="CompanyTel" ColumnName="CompanyTel" />
-          <ScalarProperty Name="CompanyAddr" ColumnName="CompanyAddr" />
           <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+          <ScalarProperty Name="CompanyAddr" ColumnName="CompanyAddr" />
+          <ScalarProperty Name="CompanyTel" ColumnName="CompanyTel" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentAttr">
       <EntityTypeMapping TypeName="DbModel.DocumentAttr">
         <MappingFragment StoreEntitySet="DocumentAttr">
-          <ScalarProperty Name="AttributeNo" ColumnName="AttributeNo" />
-          <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+          <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentMainCategory">
       <EntityTypeMapping TypeName="DbModel.DocumentMainCategory">
         <MappingFragment StoreEntitySet="DocumentMainCategory">
-          <ScalarProperty Name="MainCategoryNo" ColumnName="MainCategoryNo" />
-          <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="MainCategoryName" ColumnName="MainCategoryName" />
+          <ScalarProperty Name="MainCategoryId" ColumnName="MainCategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Documents">
       <EntityTypeMapping TypeName="DbModel.Documents">
         <MappingFragment StoreEntitySet="Documents">
-          <ScalarProperty Name="GUID" ColumnName="GUID" />
-          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
-          <ScalarProperty Name="DocTitle" ColumnName="DocTitle" />
-          <ScalarProperty Name="Version" ColumnName="Version" />
-          <ScalarProperty Name="EffDate" ColumnName="EffDate" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="EffDate" ColumnName="EffDate" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="DocTitle" ColumnName="DocTitle" />
+          <ScalarProperty Name="DocNo" ColumnName="DocNo" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentSubCategory">
       <EntityTypeMapping TypeName="DbModel.DocumentSubCategory">
         <MappingFragment StoreEntitySet="DocumentSubCategory">
-          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
-          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="CategoryNo" ColumnName="CategoryNo" />
           <ScalarProperty Name="ParentNo" ColumnName="ParentNo" />
+          <ScalarProperty Name="CategoryNo" ColumnName="CategoryNo" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentsWithSubCategory">
       <EntityTypeMapping TypeName="DbModel.DocumentsWithSubCategory">
         <MappingFragment StoreEntitySet="DocumentsWithSubCategory">
-          <ScalarProperty Name="GUID" ColumnName="GUID" />
           <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DocumentWithAttr">
       <EntityTypeMapping TypeName="DbModel.DocumentWithAttr">
         <MappingFragment StoreEntitySet="DocumentWithAttr">
-          <ScalarProperty Name="AttributeNo" ColumnName="AttributeNo" />
-          <ScalarProperty Name="GUID" ColumnName="GUID" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="AttributeId" ColumnName="AttributeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DownloadHistory">
       <EntityTypeMapping TypeName="DbModel.DownloadHistory">
         <MappingFragment StoreEntitySet="DownloadHistory">
-          <ScalarProperty Name="DownloadNo" ColumnName="DownloadNo" />
-          <ScalarProperty Name="IsUpdateNotify" ColumnName="IsUpdateNotify" />
-          <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
-          <ScalarProperty Name="Result" ColumnName="Result" />
-          <ScalarProperty Name="SourceIP" ColumnName="SourceIP" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SourceIP" ColumnName="SourceIP" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
+          <ScalarProperty Name="IsUpdateNotify" ColumnName="IsUpdateNotify" />
+          <ScalarProperty Name="DownloadNo" ColumnName="DownloadNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Groups">
       <EntityTypeMapping TypeName="DbModel.Groups">
         <MappingFragment StoreEntitySet="Groups">
-          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MainFunction">
       <EntityTypeMapping TypeName="DbModel.MainFunction">
         <MappingFragment StoreEntitySet="MainFunction">
-          <ScalarProperty Name="FunctionNo" ColumnName="FunctionNo" />
-          <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
+          <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NDAs">
       <EntityTypeMapping TypeName="DbModel.NDAs">
         <MappingFragment StoreEntitySet="NDAs">
-          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
-          <ScalarProperty Name="NDANo" ColumnName="NDANo" />
-          <ScalarProperty Name="NDAName" ColumnName="NDAName" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="NDAName" ColumnName="NDAName" />
+          <ScalarProperty Name="NDANo" ColumnName="NDANo" />
+          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NDAUpdateLog">
       <EntityTypeMapping TypeName="DbModel.NDAUpdateLog">
         <MappingFragment StoreEntitySet="NDAUpdateLog">
-          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="NDANo" ColumnName="NDANo" />
           <ScalarProperty Name="NDAName" ColumnName="NDAName" />
+          <ScalarProperty Name="NDANo" ColumnName="NDANo" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Project">
       <EntityTypeMapping TypeName="DbModel.Project">
         <MappingFragment StoreEntitySet="Project">
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="NDAId" ColumnName="NDAId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAndDocument">
+      <EntityTypeMapping TypeName="DbModel.ProjectAndDocument">
+        <MappingFragment StoreEntitySet="ProjectAndDocument">
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProjectAndUsers">
       <EntityTypeMapping TypeName="DbModel.ProjectAndUsers">
         <MappingFragment StoreEntitySet="ProjectAndUsers">
-          <ScalarProperty Name="PAUId" ColumnName="PAUId" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-          <ScalarProperty Name="InProjectStatus" ColumnName="InProjectStatus" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="InProjectStatus" ColumnName="InProjectStatus" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PAUId" ColumnName="PAUId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubFunction">
       <EntityTypeMapping TypeName="DbModel.SubFunction">
         <MappingFragment StoreEntitySet="SubFunction">
-          <ScalarProperty Name="SubFunctionNo" ColumnName="SubFunctionNo" />
-          <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
-          <ScalarProperty Name="MainFunctionNo" ColumnName="MainFunctionNo" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
+          <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
+          <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
+          <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tmp_documentGroupAndProject">
+      <EntityTypeMapping TypeName="DbModel.tmp_documentGroupAndProject">
+        <MappingFragment StoreEntitySet="tmp_documentGroupAndProject">
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserAndFunction">
       <EntityTypeMapping TypeName="DbModel.UserAndFunction">
         <MappingFragment StoreEntitySet="UserAndFunction">
-          <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="CreaterEmail" ColumnName="CreaterEmail" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreaterEmail" ColumnName="CreaterEmail" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WinbondGroupAndFuntion">
       <EntityTypeMapping TypeName="DbModel.WinbondGroupAndFuntion">
         <MappingFragment StoreEntitySet="WinbondGroupAndFuntion">
-          <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
-          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="SubFuntionId" ColumnName="SubFuntionId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WinbondUserAndGroup">
       <EntityTypeMapping TypeName="DbModel.WinbondUserAndGroup">
         <MappingFragment StoreEntitySet="WinbondUserAndGroup">
-          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WinbondUserAndProject">
       <EntityTypeMapping TypeName="DbModel.WinbondUserAndProject">
         <MappingFragment StoreEntitySet="WinbondUserAndProject">
-          <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
-          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-          <ScalarProperty Name="Createdate" ColumnName="Createdate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createdate" ColumnName="Createdate" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WinbondUsers">
       <EntityTypeMapping TypeName="DbModel.WinbondUsers">
         <MappingFragment StoreEntitySet="WinbondUsers">
-          <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -239,10 +256,7 @@
       <EntityTypeMapping TypeName="DbModel.UserProfile">
         <MappingFragment StoreEntitySet="UserProfile">
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Contractor" ColumnName="Contractor" />
           <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
-          <ScalarProperty Name="ContraceNo" ColumnName="ContraceNo" />
-          <ScalarProperty Name="IsInternal" ColumnName="IsInternal" />
           <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
           <ScalarProperty Name="ExtensinNo" ColumnName="ExtensinNo" />
           <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
@@ -253,6 +267,7 @@
           <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
           <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
           <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

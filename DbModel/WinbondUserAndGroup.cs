@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class WinbondUserAndGroup
     {
-        public long GroupNo { get; set; }
+        public long GroupId { get; set; }
         public string Email { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string Status { get; set; }

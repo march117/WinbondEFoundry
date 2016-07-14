@@ -15,8 +15,10 @@
     <EntitySet Name="NDAs" EntityType="DbModel.Store.NDAs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="NDAUpdateLog" EntityType="DbModel.Store.NDAUpdateLog" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Project" EntityType="DbModel.Store.Project" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectAndDocument" EntityType="DbModel.Store.ProjectAndDocument" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectAndUsers" EntityType="DbModel.Store.ProjectAndUsers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SubFunction" EntityType="DbModel.Store.SubFunction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tmp_documentGroupAndProject" EntityType="DbModel.Store.tmp_documentGroupAndProject" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserAndFunction" EntityType="DbModel.Store.UserAndFunction" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserProfile" EntityType="DbModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WinbondGroupAndFuntion" EntityType="DbModel.Store.WinbondGroupAndFuntion" store:Type="Tables" Schema="dbo" />
@@ -29,14 +31,14 @@
       <PropertyRef Name="CompanyNo" />
       <PropertyRef Name="Ip" />
     </Key>
-    <Property Name="CompanyNo" Type="bigint" Nullable="false" />
+    <Property Name="CompanyNo" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="Ip" Type="varchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <EntityType Name="CompanyProfile">
     <Key>
       <PropertyRef Name="CompanyNo" />
     </Key>
-    <Property Name="CompanyNo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyNo" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
     <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -46,9 +48,9 @@
   </EntityType>
   <EntityType Name="DocumentAttr">
     <Key>
-      <PropertyRef Name="AttributeNo" />
+      <PropertyRef Name="AttributeId" />
     </Key>
-    <Property Name="AttributeNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="AttributeName" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="bigint" />
@@ -56,9 +58,9 @@
   </EntityType>
   <EntityType Name="DocumentMainCategory">
     <Key>
-      <PropertyRef Name="MainCategoryNo" />
+      <PropertyRef Name="MainCategoryId" />
     </Key>
-    <Property Name="MainCategoryNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MainCategoryId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="MainCategoryName" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
@@ -69,7 +71,7 @@
       <PropertyRef Name="GUID" />
     </Key>
     <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="DocNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DocNo" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="DocTitle" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="Version" Type="float" Nullable="false" />
     <Property Name="EffDate" Type="datetime" Nullable="false" />
@@ -99,9 +101,9 @@
   </EntityType>
   <EntityType Name="DocumentWithAttr">
     <Key>
-      <PropertyRef Name="AttributeNo" />
+      <PropertyRef Name="AttributeId" />
     </Key>
-    <Property Name="AttributeNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
@@ -121,18 +123,18 @@
   </EntityType>
   <EntityType Name="Groups">
     <Key>
-      <PropertyRef Name="GroupNo" />
+      <PropertyRef Name="GroupId" />
     </Key>
-    <Property Name="GroupNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="GroupName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="MainFunction">
     <Key>
-      <PropertyRef Name="FunctionNo" />
+      <PropertyRef Name="FunctionId" />
     </Key>
-    <Property Name="FunctionNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FunctionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FunctionName" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
@@ -140,61 +142,77 @@
     <Key>
       <PropertyRef Name="NDAId" />
     </Key>
-    <Property Name="NDAId" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="NDANo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="NDAName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="NDAId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NDANo" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="NDAName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
-    <Property Name="CompanyNo" Type="bigint" Nullable="false" />
+    <Property Name="CompanyNo" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
   </EntityType>
   <EntityType Name="NDAUpdateLog">
     <Key>
       <PropertyRef Name="NDAId" />
-      <PropertyRef Name="ProjectId" />
+      <PropertyRef Name="ProjectNo" />
     </Key>
-    <Property Name="NDAId" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="NDAId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="NDANo" Type="bigint" Nullable="false" />
     <Property Name="NDAName" Type="nvarchar" Nullable="false" MaxLength="255" />
   </EntityType>
   <EntityType Name="Project">
     <Key>
-      <PropertyRef Name="ProjectId" />
+      <PropertyRef Name="ProjectNo" />
     </Key>
-    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="ProjectNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="NDAId" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
+  <EntityType Name="ProjectAndDocument">
+    <Key>
+      <PropertyRef Name="ProjectNo" />
+      <PropertyRef Name="GUID" />
+    </Key>
+    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="GUID" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
   <EntityType Name="ProjectAndUsers">
     <Key>
       <PropertyRef Name="PAUId" />
     </Key>
-    <Property Name="PAUId" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="PAUId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="LastUpdate" Type="datetime" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
     <Property Name="InProjectStatus" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
-    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="SubFunction">
     <Key>
-      <PropertyRef Name="SubFunctionNo" />
+      <PropertyRef Name="SubFunctionId" />
     </Key>
-    <Property Name="SubFunctionNo" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SubFunctionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MainFunctionId" Type="bigint" Nullable="false" />
+    <Property Name="ParentFunctionId" Type="bigint" />
     <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="MainFunctionNo" Type="bigint" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tmp_documentGroupAndProject">
+    <Key>
+      <PropertyRef Name="GroupNo" />
+      <PropertyRef Name="ProjectNo" />
+    </Key>
+    <Property Name="GroupNo" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="255" />
   </EntityType>
   <EntityType Name="UserAndFunction">
     <Key>
@@ -203,15 +221,17 @@
     </Key>
     <Property Name="SubFuntionNo" Type="bigint" Nullable="false" />
     <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="ProjectNo" Type="varchar" MaxLength="100" />
     <Property Name="CreaterEmail" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
   </EntityType>
   <EntityType Name="UserProfile">
     <Key>
-      <PropertyRef Name="UserEmail" />
+      <PropertyRef Name="UserId" />
     </Key>
+    <Property Name="UserId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="CompanyNo" Type="bigint" Nullable="false" />
+    <Property Name="CompanyNo" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="UserPwd" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="Creater" Type="varchar" Nullable="false" MaxLength="255" />
@@ -220,28 +240,25 @@
     <Property Name="LastUpdate" Type="datetime" />
     <Property Name="ExtensinNo" Type="varchar" MaxLength="50" />
     <Property Name="PhoneNo" Type="varchar" MaxLength="50" />
-    <Property Name="IsInternal" Type="bit" Nullable="false" />
-    <Property Name="ContraceNo" Type="varchar" MaxLength="50" />
     <Property Name="ExpireDate" Type="datetime" />
-    <Property Name="Contractor" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="2" />
   </EntityType>
   <EntityType Name="WinbondGroupAndFuntion">
     <Key>
-      <PropertyRef Name="SubFuntionNo" />
-      <PropertyRef Name="GroupNo" />
+      <PropertyRef Name="SubFuntionId" />
+      <PropertyRef Name="GroupId" />
     </Key>
-    <Property Name="SubFuntionNo" Type="bigint" Nullable="false" />
-    <Property Name="GroupNo" Type="bigint" Nullable="false" />
+    <Property Name="SubFuntionId" Type="bigint" Nullable="false" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
   </EntityType>
   <EntityType Name="WinbondUserAndGroup">
     <Key>
-      <PropertyRef Name="GroupNo" />
+      <PropertyRef Name="GroupId" />
       <PropertyRef Name="Email" />
     </Key>
-    <Property Name="GroupNo" Type="bigint" Nullable="false" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" />
     <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
@@ -249,10 +266,10 @@
   <EntityType Name="WinbondUserAndProject">
     <Key>
       <PropertyRef Name="ADAcount" />
-      <PropertyRef Name="ProjectId" />
+      <PropertyRef Name="ProjectNo" />
     </Key>
     <Property Name="ADAcount" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="Createdate" Type="datetime" Nullable="false" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
   </EntityType>

@@ -14,8 +14,7 @@ namespace DbModel
     
     public partial class Project
     {
-        public string ProjectId { get; set; }
-        public long ProjectNo { get; set; }
+        public string ProjectNo { get; set; }
         public string ProjectName { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }

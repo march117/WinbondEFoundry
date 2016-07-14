@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class MainFunction
     {
-        public long FunctionNo { get; set; }
+        public long FunctionId { get; set; }
         public string FunctionName { get; set; }
         public bool IsActive { get; set; }
     }

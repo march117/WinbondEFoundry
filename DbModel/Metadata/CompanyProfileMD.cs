@@ -18,8 +18,8 @@ namespace DbModel
 
     public class CompanyProfileMD
     {
-        [DisplayName("公司流水號"), Required, Key]
-        public int CompanyNo { get; set; }
+        [DisplayName("公司編號"), Required, Key]
+        public string CompanyNo { get; set; }
 
         [DisplayName("建立時間"), Required]
         public System.DateTime CreateDate { get; set; }

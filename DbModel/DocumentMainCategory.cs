@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class DocumentMainCategory
     {
-        public long MainCategoryNo { get; set; }
+        public long MainCategoryId { get; set; }
         public string MainCategoryName { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }

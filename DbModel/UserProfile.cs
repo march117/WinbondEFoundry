@@ -14,8 +14,9 @@ namespace DbModel
     
     public partial class UserProfile
     {
+        public long UserId { get; set; }
         public string UserEmail { get; set; }
-        public long CompanyNo { get; set; }
+        public string CompanyNo { get; set; }
         public string UserPwd { get; set; }
         public bool IsActive { get; set; }
         public string Creater { get; set; }
@@ -24,10 +25,7 @@ namespace DbModel
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public string ExtensinNo { get; set; }
         public string PhoneNo { get; set; }
-        public bool IsInternal { get; set; }
-        public string ContraceNo { get; set; }
         public Nullable<System.DateTime> ExpireDate { get; set; }
-        public string Contractor { get; set; }
         public string Status { get; set; }
     }
 }

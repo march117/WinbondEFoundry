@@ -20,10 +20,13 @@ namespace DbModel
 
     public class UserProfileMD
     {
-        [DisplayName("Email"), Required, RegularExpression("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"), Key]
+        [DisplayName("使用者流水號"), Required, Key]
+        public long UserId { get; set; }
+
+        [DisplayName("Email"), Required, RegularExpression("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")]
         public string UserEmail { get; set; }
 
-        [DisplayName("公司流水號"), Required]
+        [DisplayName("公司"), Required]
         public long CompanyNo { get; set; }
 
         [DisplayName("密碼"), Required,DataType(DataType.Password)]
@@ -36,7 +39,7 @@ namespace DbModel
         public bool IsActive { get; set; }
 
         [DisplayName("建立者"), Required]
-        public string Creater { get; set; }
+        public Nullable<long> Creater { get; set; }
 
         [DisplayName("最後登入時間")]
         public Nullable<System.DateTime> LastLoginDate { get; set; }
@@ -47,22 +50,14 @@ namespace DbModel
         [DisplayName("最後更新時間")]
         public Nullable<System.DateTime> LastUpdate { get; set; }
 
+        [DisplayName("分機號碼")]
         public string ExtensinNo { get; set; }
 
         [DisplayName("電話號碼"), Required]
         public string PhoneNo { get; set; }
 
-        [DisplayName("是否為內部使用者"), Required]
-        public bool IsInternal { get; set; }
-
-        [Required]
-        public string ContraceNo { get; set; }
-
         [DisplayName("帳號過期時間")]
         public Nullable<System.DateTime> ExpireDate { get; set; }
-
-        [DisplayName("承包商"), Required]
-        public string Contractor { get; set; }
 
         [DisplayName("狀態"), Required]
         public string Status { get; set; }

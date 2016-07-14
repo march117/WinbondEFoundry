@@ -9,7 +9,7 @@
     <ul>
         @foreach (Groups g in Model)
         {        
-            <li><input type="checkbox" value="@g.GroupNo" name="id" /><a href="@Url.Action("Edit", new { @id=g.GroupNo})">@g.GroupName</a></li>
+            <li><input type="checkbox" value="@g.GroupId" name="id" /><a href="@Url.Action("Edit", new { @id = g.GroupId })">@g.GroupName</a></li>
         }
     </ul>
     <input type="submit" value="Submit" />

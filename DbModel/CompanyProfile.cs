@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class CompanyProfile
     {
-        public int CompanyNo { get; set; }
+        public string CompanyNo { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public string CompanyName { get; set; }

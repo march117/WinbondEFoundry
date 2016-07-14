@@ -14,7 +14,7 @@ namespace DbModel
     
     public partial class CompanyIPList
     {
-        public long CompanyNo { get; set; }
+        public string CompanyNo { get; set; }
         public string Ip { get; set; }
     }
 }

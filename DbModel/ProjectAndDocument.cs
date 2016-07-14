@@ -12,15 +12,9 @@ namespace DbModel
     using System;
     using System.Collections.Generic;
     
-    public partial class NDAs
+    public partial class ProjectAndDocument
     {
-        public long NDAId { get; set; }
-        public string NDANo { get; set; }
-        public string NDAName { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
-        public string CompanyNo { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public Nullable<System.DateTime> LastUpdate { get; set; }
+        public string ProjectNo { get; set; }
+        public string GUID { get; set; }
     }
 }

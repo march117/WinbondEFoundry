@@ -15,7 +15,7 @@ namespace DbModel
     public partial class WinbondUserAndProject
     {
         public string ADAcount { get; set; }
-        public string ProjectId { get; set; }
+        public string ProjectNo { get; set; }
         public System.DateTime Createdate { get; set; }
         public string Status { get; set; }
     }

@@ -14,8 +14,8 @@ namespace DbModel
     
     public partial class WinbondGroupAndFuntion
     {
-        public long SubFuntionNo { get; set; }
-        public long GroupNo { get; set; }
+        public long SubFuntionId { get; set; }
+        public long GroupId { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string Status { get; set; }
     }
