@@ -25,6 +25,17 @@
     <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.Store.WinbondUserAndGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.Store.WinbondUserAndProject" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WinbondUsers" EntityType="DbModel.Store.WinbondUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.Store.ProjectAndSubFunctionView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndSubFunctionView">
+      <DefiningQuery>SELECT 
+      [ProjectAndSubFunctionView].[ProjectNo] AS [ProjectNo], 
+      [ProjectAndSubFunctionView].[SubFunctionId] AS [SubFunctionId], 
+      [ProjectAndSubFunctionView].[SubFunctionName] AS [SubFunctionName], 
+      [ProjectAndSubFunctionView].[ProjectName] AS [ProjectName], 
+      [ProjectAndSubFunctionView].[UserEmail] AS [UserEmail], 
+      [ProjectAndSubFunctionView].[MainFunctionId] AS [MainFunctionId], 
+      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId]
+      FROM [dbo].[ProjectAndSubFunctionView] AS [ProjectAndSubFunctionView]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
       <DefiningQuery>SELECT 
       [ProjectAndUsersView].[PAUId] AS [PAUId], 
@@ -296,6 +307,26 @@
     <Property Name="ADAcount" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="Role" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+      警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndSubFunctionView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
+      -->
+  <EntityType Name="ProjectAndSubFunctionView">
+    <Key>
+      <PropertyRef Name="ProjectNo" />
+      <PropertyRef Name="SubFunctionId" />
+      <PropertyRef Name="SubFunctionName" />
+      <PropertyRef Name="ProjectName" />
+      <PropertyRef Name="UserEmail" />
+      <PropertyRef Name="MainFunctionId" />
+    </Key>
+    <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
+    <Property Name="SubFunctionId" Type="bigint" Nullable="false" />
+    <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="MainFunctionId" Type="bigint" Nullable="false" />
+    <Property Name="ParentFunctionId" Type="bigint" />
   </EntityType>
   <!--產生期間發現錯誤:
       警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。

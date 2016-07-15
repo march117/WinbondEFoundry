@@ -26,6 +26,7 @@
     <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
     <EntitySet Name="Project" EntityType="DbModel.Project" />
     <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.ProjectAndUsersView" />
+    <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.ProjectAndSubFunctionView" />
   </EntityContainer>
   <EntityType Name="CompanyIPList">
     <Key>
@@ -307,5 +308,22 @@
     <Property Type="String" Name="InProjectStatus" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
     <Property Type="String" Name="ProjectId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ProjectAndSubFunctionView">
+    <Key>
+      <PropertyRef Name="ProjectNo" />
+      <PropertyRef Name="SubFunctionId" />
+      <PropertyRef Name="SubFunctionName" />
+      <PropertyRef Name="ProjectName" />
+      <PropertyRef Name="UserEmail" />
+      <PropertyRef Name="MainFunctionId" />
+    </Key>
+    <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Type="Int64" Name="SubFunctionId" Nullable="false" />
+    <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
+    <Property Type="Int64" Name="ParentFunctionId" />
   </EntityType>
 </Schema>

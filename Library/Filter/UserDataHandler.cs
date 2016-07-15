@@ -13,7 +13,7 @@ namespace Library.Filter
 {
     public class UserDataHandler : ActionFilterAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             //將UserProfile寫入ViewBag
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)

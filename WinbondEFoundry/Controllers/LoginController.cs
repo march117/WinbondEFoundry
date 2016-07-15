@@ -21,6 +21,21 @@ namespace WinbondEFoundry.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 登出
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// 取得使用者關聯的專案(Ajax Api)
+        /// </summary>
+        /// <param name="lv"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult GetProjectByUser([Bind(Include="UserEmail,Password")]LoginVM lv)
         {
@@ -38,6 +53,11 @@ namespace WinbondEFoundry.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Login Process
+        /// </summary>
+        /// <param name="lv"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(LoginVM lv)

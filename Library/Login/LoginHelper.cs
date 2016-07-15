@@ -9,6 +9,7 @@ using DbModel.ViewModel.Login;
 using DbModel.Helper;
 using DbModel.Util;
 using DbModel;
+using DbModel.ViewModel.SubFunction;
 
 namespace Library.Login
 {
@@ -101,6 +102,18 @@ namespace Library.Login
                 uVM.UserEmail = _user.UserEmail;
                 uVM.UserId = _user.UserId;
                 uVM.ProjectNo = _loginView.ProjectNo;
+                uVM.SubFunctionList = DbHelper.GetList<ProjectAndSubFunctionView>(delegate(ProjectAndSubFunctionView pasV)
+                                        {
+                                            return pasV.UserEmail == _user.UserEmail && pasV.ProjectNo == _loginView.ProjectNo;
+                                        }).Select(o => new SubFunctionVM
+                                        {
+                                            MainFunctionId = o.MainFunctionId,
+                                            ParentFunctionId = o.ParentFunctionId,
+                                            SubFunctionId = o.SubFunctionId,
+                                            SubFunctionName = o.SubFunctionName
+                                        }).ToList();
+
+                
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
                                                                             _user.UserEmail,
                                                                             DateTime.Now,

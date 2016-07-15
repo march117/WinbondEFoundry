@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    @ViewBag.UserProfile.ProjectNo
+    <a href="@Url.Action("Logout","Login")" style="float:right">Logout</a>
+    @Html.Partial("~/Views/Shared/_FunctionMenu.cshtml")
     @RenderBody()
 </body>
 </html>

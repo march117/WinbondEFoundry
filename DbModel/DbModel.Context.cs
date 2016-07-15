@@ -50,5 +50,6 @@ namespace DbModel
         public DbSet<WinbondUsers> WinbondUsers { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<ProjectAndUsersView> ProjectAndUsersView { get; set; }
+        public DbSet<ProjectAndSubFunctionView> ProjectAndSubFunctionView { get; set; }
     }
 }

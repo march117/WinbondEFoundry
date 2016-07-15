@@ -92,6 +92,7 @@
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper\DbHelper.cs" />
+    <Compile Include="Helper\Function\MainFunctionHelper.cs" />
     <Compile Include="Helper\Project\ProjectDataHelper.cs" />
     <Compile Include="MainFunction.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
@@ -116,6 +117,9 @@
     <Compile Include="ProjectAndDocument.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProjectAndSubFunctionView.cs">
+      <DependentUpon>DbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProjectAndUsers.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -138,6 +142,8 @@
     <Compile Include="Util\SecureUtil.cs" />
     <Compile Include="ViewModel\Login\LoginVM.cs" />
     <Compile Include="ViewModel\Project\ProjectAndUsersVM.cs" />
+    <Compile Include="ViewModel\SubFunction\SubFunctionVM.cs" />
+    <Compile Include="ViewModel\User\UserAndFunctionVM.cs" />
     <Compile Include="ViewModel\User\UserProfileVM.cs" />
     <Compile Include="WinbondGroupAndFuntion.cs">
       <DependentUpon>DbModel.tt</DependentUpon>

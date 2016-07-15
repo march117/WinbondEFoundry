@@ -30,6 +30,17 @@
           <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.Store.WinbondUserAndGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.Store.WinbondUserAndProject" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="WinbondUsers" EntityType="DbModel.Store.WinbondUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.Store.ProjectAndSubFunctionView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndSubFunctionView">
+            <DefiningQuery>SELECT 
+      [ProjectAndSubFunctionView].[ProjectNo] AS [ProjectNo], 
+      [ProjectAndSubFunctionView].[SubFunctionId] AS [SubFunctionId], 
+      [ProjectAndSubFunctionView].[SubFunctionName] AS [SubFunctionName], 
+      [ProjectAndSubFunctionView].[ProjectName] AS [ProjectName], 
+      [ProjectAndSubFunctionView].[UserEmail] AS [UserEmail], 
+      [ProjectAndSubFunctionView].[MainFunctionId] AS [MainFunctionId], 
+      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId]
+      FROM [dbo].[ProjectAndSubFunctionView] AS [ProjectAndSubFunctionView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
             <DefiningQuery>SELECT 
       [ProjectAndUsersView].[PAUId] AS [PAUId], 
@@ -303,6 +314,26 @@
           <Property Name="Role" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <!--產生期間發現錯誤:
+      警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndSubFunctionView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
+      -->
+        <EntityType Name="ProjectAndSubFunctionView">
+          <Key>
+            <PropertyRef Name="ProjectNo" />
+            <PropertyRef Name="SubFunctionId" />
+            <PropertyRef Name="SubFunctionName" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="UserEmail" />
+            <PropertyRef Name="MainFunctionId" />
+          </Key>
+          <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
+          <Property Name="SubFunctionId" Type="bigint" Nullable="false" />
+          <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="MainFunctionId" Type="bigint" Nullable="false" />
+          <Property Name="ParentFunctionId" Type="bigint" />
+        </EntityType>
+        <!--產生期間發現錯誤:
       警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
       -->
         <EntityType Name="ProjectAndUsersView">
@@ -367,6 +398,7 @@
           <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
           <EntitySet Name="Project" EntityType="DbModel.Project" />
           <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.ProjectAndUsersView" />
+          <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.ProjectAndSubFunctionView" />
         </EntityContainer>
         <EntityType Name="CompanyIPList">
           <Key>
@@ -648,6 +680,23 @@
           <Property Type="String" Name="InProjectStatus" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
           <Property Type="String" Name="ProjectId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProjectAndSubFunctionView">
+          <Key>
+            <PropertyRef Name="ProjectNo" />
+            <PropertyRef Name="SubFunctionId" />
+            <PropertyRef Name="SubFunctionName" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="UserEmail" />
+            <PropertyRef Name="MainFunctionId" />
+          </Key>
+          <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="SubFunctionId" Nullable="false" />
+          <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
+          <Property Type="Int64" Name="ParentFunctionId" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -943,6 +992,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProjectAndSubFunctionView">
+            <EntityTypeMapping TypeName="DbModel.ProjectAndSubFunctionView">
+              <MappingFragment StoreEntitySet="ProjectAndSubFunctionView">
+                <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
+                <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
+                <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
+                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -990,6 +1052,7 @@
         <EntityTypeShape EntityType="DbModel.WinbondUsers" Width="1.5" PointX="4.75" PointY="12.75" Height="1.5506396484374818" />
         <EntityTypeShape EntityType="DbModel.Project" Width="1.5" PointX="0.75" PointY="13.75" Height="2.4746101888020746" />
         <EntityTypeShape EntityType="DbModel.ProjectAndUsersView" Width="1.5" PointX="13.375" PointY="6.75" Height="2.8441984049479174" />
+        <EntityTypeShape EntityType="DbModel.ProjectAndSubFunctionView" Width="1.5" PointX="7.375" PointY="13.75" Height="2.2898160807291674" />
       </Diagram>
     </Diagrams>
   </Designer>

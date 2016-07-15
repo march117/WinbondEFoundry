@@ -16,7 +16,10 @@ namespace WinbondEFoundry
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            //寫入UserData
             filters.Add(new UserDataHandler());
+            //寫入MainFunction
+            filters.Add(new MainFunctionData());
         }
 
         public static void RegisterRoutes(RouteCollection routes)

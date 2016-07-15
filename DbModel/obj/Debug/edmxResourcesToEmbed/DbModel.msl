@@ -289,5 +289,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAndSubFunctionView">
+      <EntityTypeMapping TypeName="DbModel.ProjectAndSubFunctionView">
+        <MappingFragment StoreEntitySet="ProjectAndSubFunctionView">
+          <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
+          <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
+          <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
