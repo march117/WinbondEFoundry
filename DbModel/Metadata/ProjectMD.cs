@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace DbModel
 {
     [MetadataType(typeof(ProjectMD))]
@@ -11,28 +12,29 @@ namespace DbModel
     {
         public Project()
         {
-            
+            CreateDate = DateTime.Now;
+            ProjectNo = Prefix + TmpId.ToString();
         }
     }
 
     public partial class ProjectMD
     {
-        [DisplayName("專案編號"),Required,Key]
+        [DisplayName("Project No"), Key, DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string ProjectNo { get; set; }
 
-        [DisplayName("專案名稱"), Required]
+        [DisplayName("Project Name"), Required]
         public string ProjectName { get; set; }
 
-        [DisplayName("建立時間"), Required]
+        [DisplayName("Create Date"), Required]
         public Nullable<System.DateTime> CreateDate { get; set; }
 
-        [DisplayName("最後更新時間"), Required]
+        [DisplayName("Last Update Date")]
         public Nullable<System.DateTime> LastUpdate { get; set; }
 
-        [DisplayName("開始時間"), Required]
+        [DisplayName("Start Date"), Required]
         public System.DateTime StartDate { get; set; }
 
-        [DisplayName("合約編號"), Required]
+        [DisplayName("NDA"), Required]
         public Nullable<long> NDAId { get; set; }
 
         public long TmpId { get; set; }

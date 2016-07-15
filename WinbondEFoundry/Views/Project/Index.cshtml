@@ -1,21 +1,30 @@
 ﻿@using DbModel
 @model List<Project>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Project";
 }
 
-<h2>Index</h2>
-<form action="@Url.Action("DeleteItem")" method="post">
-    <ul>
+<h2 class="col-xs-8">Project List</h2>
+<a href="@Url.Action("Create")" class="btn btn-primary fa fa-plus pull-right" title="Add Project"></a>
+<form action="@Url.Action("DeleteItem")" method="post" id="mainList">
+    <table class="table table-hover">
+        <tr>
+            <th></th>
+            <th>Project Name</th>
+            <th>Edit User</th>
+            <th>Edit SubFunction</th>
+        </tr>
         @foreach (Project p in Model)
-        {        
-            <li>
-                <input type="checkbox" value="@p.ProjectNo" name="id" /><a href="@Url.Action("Edit", new { @id = p.ProjectNo })">@p.ProjectName</a>&nbsp;
-                <a href="@Url.Action("UserList", new { @id = p.ProjectNo})">Edit User</a>
-                <a href="@Url.Action("EditSubFunction", new {@id = p.ProjectNo })">Edit SubFunction</a>
-            </li>
+        {
+            <tr>
+                <td><input type="checkbox" value="@p.ProjectNo" name="id" /></td>
+                <td> <a href="@Url.Action("Edit", new { @id = p.ProjectNo })">@p.ProjectName</a></td>
+                <td><a href="@Url.Action("UserList", new { @id = p.ProjectNo})" class="btn btn-primary fa fa-user" title="Edit User"></a></td>
+                <td><a href="@Url.Action("EditSubFunction", new {@id = p.ProjectNo })" class="btn btn-primary fa fa-share-alt" title="Edit SubFunction"></a></td>
+            </tr>
         }
-    </ul>
-    <input type="submit" value="Submit" />
+    </table>
+
+    <input type="submit" value="Submit" class="btn btn-primary"/>
 </form>
 

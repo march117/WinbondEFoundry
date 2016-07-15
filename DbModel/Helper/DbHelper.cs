@@ -154,7 +154,7 @@ namespace DbModel.Helper
                 {
                     Func<T,bool> pre = delegate(T model)
                     {
-                        string pkCol = GetPKColumnName(typeof(T));
+                        //string pkCol = GetPKColumnName(typeof(T));
                         object pkVal = GetPKColumnValue<T>(model);
                         return id.Contains(pkVal.ToString());
                     };

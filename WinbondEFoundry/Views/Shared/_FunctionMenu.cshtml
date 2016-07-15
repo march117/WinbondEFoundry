@@ -1,27 +1,38 @@
 ﻿@using DbModel
 @using DbModel.ViewModel.User
 @using DbModel.ViewModel.SubFunction
-@{
+@{    
     if (User.Identity.IsAuthenticated)
     {
         List<MainFunction> mainFuncList = ViewBag.MainFunction;
         UserProfileVM uVM = ViewBag.UserProfile;
         List<SubFunctionVM> subFuncList = uVM.SubFunctionList;
-        <ul>
-            @foreach (MainFunction mainFunc in mainFuncList)
-            {
-                <li>@mainFunc.FunctionName</li>
-                if (subFuncList.Any(o => o.MainFunctionId == mainFunc.FunctionId))
-                {
-                    <ul>
-                        @foreach (SubFunctionVM subFunc in subFuncList.Where(o => o.MainFunctionId == mainFunc.FunctionId))
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                        @foreach (MainFunction mainFunc in mainFuncList)
                         {
-                            <li>@subFunc.SubFunctionName</li>   
+                            bool hasChildren = subFuncList.Any(o => o.MainFunctionId == mainFunc.FunctionId);
+                            <li @(hasChildren?"class=\"dropdown\"":"")>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">@mainFunc.FunctionName <span class="caret"></span></a>
+                            
+                            @if (hasChildren)
+                            {
+                                <ul class="dropdown-menu" aria-labelledby="themes">
+                                    @foreach (SubFunctionVM subFunc in subFuncList.Where(o => o.MainFunctionId == mainFunc.FunctionId))
+                                    {
+                                        <li><a href="javascript:;">@subFunc.SubFunctionName</a></li>   
+                                    }
+                                </ul>
+                            }
+                            </li>
                         }
+                        <li><a href="@Url.Action("Logout","Login")" style="float:right">Logout</a></li>
                     </ul>
-                }
-            }
-        </ul>
+                </div>
+            </div>
+        </nav>
     }   
 }
 

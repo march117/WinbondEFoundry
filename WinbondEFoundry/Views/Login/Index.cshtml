@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>登入</h2>
+<h2>User Login</h2>
 <style>
     .projectNoWidget
     {
@@ -12,7 +12,7 @@
     }
 </style>
 <script>
-    var verificationUser = function () {
+    var verifyUser = function () {
         $.ajax({
             url: "/Login/GetProjectByUser",
             type: "post",
@@ -43,31 +43,33 @@
 </script>
 @ViewBag.isLogin
 @ViewBag.UserProfile
-<form action="@Url.Action("Index")" method="post" id="loginForm">
+<form action="@Url.Action("Index")" method="post" id="loginForm" class="form-horizontal well">
     @Html.AntiForgeryToken()
     <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]"/>
-    <table>
-        <tr>
-            <td>@Html.LabelFor(o=>o.UserEmail)</td>
-            <td>@Html.TextBoxFor(o=>o.UserEmail)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(o=>o.Password)</td>
-            <td>@Html.PasswordFor(o=>o.Password)</td>
-        </tr>
-        <tr class="verifyWidget">
-            <td colspan="2"><input type="button" value="verification" onclick="verificationUser()"/></td>
-        </tr>
-        <tr class="projectNoWidget">
-            <td>@Html.LabelFor(o=>o.ProjectNo)</td>
-            <td>
-                <select name="ProjectNo">
-                    <option value="">請選擇</option>
-                </select>
-            </td>
-        </tr>        
-        <tr class="projectNoWidget">
-            <td colspan="2"><input type="button" value="send" onclick="formSubmit()"/></td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">@Html.LabelFor(o => o.UserEmail)</label>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(o => o.UserEmail, new { @class="form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">@Html.LabelFor(o => o.Password)</label>
+        <div class="col-lg-10">
+            @Html.PasswordFor(o => o.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group verifyWidget text-center">
+        <a href="javascript:verifyUser()" class="btn btn-primary">Verify User</a>
+    </div>
+    <div class="form-group projectNoWidget">
+        <label class="col-lg-2 control-label">@Html.LabelFor(o => o.ProjectNo)</label>
+        <div class="col-lg-10">
+            <select name="ProjectNo" class="form-control ">
+                <option value="">Please Choose</option>
+            </select>
+        </div>        
+    </div>
+    <div class="form-group projectNoWidget text-center">
+        <a href="javascript:formSubmit()" class="btn btn-primary">Login</a>
+    </div>    
 </form>
