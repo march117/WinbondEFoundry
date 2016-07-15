@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using Newtonsoft.Json;
+using DbModel.ViewModel.User;
 using DbModel.ViewModel.Login;
 using DbModel.Helper;
 using DbModel.Util;
@@ -26,8 +27,7 @@ namespace Library.Login
         {
             _loginView = lv;
             GetUser();
-            CheckPW();
-            EncryptTicket();
+            CheckPW();            
         }
 
         /// <summary>
@@ -54,6 +54,7 @@ namespace Library.Login
         /// <returns>Encrypt Ticket</returns>
         public string GetEncrptyTicket()
         {
+            EncryptTicket();
             return _encryptTicket;
         }
 
@@ -75,15 +76,15 @@ namespace Library.Login
         /// </summary>
         private void CheckPW()
         {
-            if (_user != null)
+            if (_user != null && _user.IsActive)
             {
                 string pwd = SecureUtil.Decrypt(_user.UserPwd);
                 isLogin = pwd == _loginView.Password;
-
-                //登入失敗清除使用者
+            
                 if (!isLogin)
                 {
-                    _user = null;
+                    //登入失敗清除使用者
+                    _user = null;                    
                 }
             }
             
@@ -96,12 +97,16 @@ namespace Library.Login
         {
             if (_user != null)
             {
+                UserProfileVM uVM = new UserProfileVM();
+                uVM.UserEmail = _user.UserEmail;
+                uVM.UserId = _user.UserId;
+                uVM.ProjectNo = _loginView.ProjectNo;
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
                                                                             _user.UserEmail,
                                                                             DateTime.Now,
                                                                             DateTime.Now.AddMinutes(30),
                                                                             false,
-                                                                            JsonConvert.SerializeObject(_user));
+                                                                            JsonConvert.SerializeObject(uVM));
                 _encryptTicket = FormsAuthentication.Encrypt(ticket);
             }
         }

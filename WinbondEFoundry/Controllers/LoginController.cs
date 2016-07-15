@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DbModel;
+using DbModel.Helper;
 using DbModel.ViewModel.Login;
 using Library.Login;
 using System.Web.Security;
@@ -17,6 +19,23 @@ namespace WinbondEFoundry.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetProjectByUser([Bind(Include="UserEmail,Password")]LoginVM lv)
+        {
+            LoginHelper lh = new LoginHelper(lv);
+            if (lh.Login())
+            {
+                List<ProjectAndUsersView> projects = DbHelper.GetList<ProjectAndUsersView>(delegate(ProjectAndUsersView pauv)
+                {
+                    return pauv.UserId == lh.User().UserId;
+                });
+
+                return Json(projects);
+            }
+
+            return null;
         }
 
         [HttpPost]

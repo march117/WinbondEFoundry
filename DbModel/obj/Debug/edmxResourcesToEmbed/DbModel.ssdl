@@ -25,6 +25,20 @@
     <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.Store.WinbondUserAndGroup" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.Store.WinbondUserAndProject" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WinbondUsers" EntityType="DbModel.Store.WinbondUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
+      <DefiningQuery>SELECT 
+      [ProjectAndUsersView].[PAUId] AS [PAUId], 
+      [ProjectAndUsersView].[ProjectNo] AS [ProjectNo], 
+      [ProjectAndUsersView].[ProjectName] AS [ProjectName], 
+      [ProjectAndUsersView].[UserId] AS [UserId], 
+      [ProjectAndUsersView].[UserEmail] AS [UserEmail], 
+      [ProjectAndUsersView].[EndDate] AS [EndDate], 
+      [ProjectAndUsersView].[StartDate] AS [StartDate], 
+      [ProjectAndUsersView].[InProjectStatus] AS [InProjectStatus], 
+      [ProjectAndUsersView].[IsAdmin] AS [IsAdmin], 
+      [ProjectAndUsersView].[ProjectId] AS [ProjectId]
+      FROM [dbo].[ProjectAndUsersView] AS [ProjectAndUsersView]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
   <EntityType Name="CompanyIPList">
     <Key>
@@ -166,12 +180,14 @@
     <Key>
       <PropertyRef Name="ProjectNo" />
     </Key>
-    <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="100" />
-    <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" StoreGeneratedPattern="Computed" />
+    <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="LastUpdate" Type="datetime" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
-    <Property Name="NDAId" Type="bigint" />
+    <Property Name="NDAId" Type="bigint" Nullable="false" />
+    <Property Name="TmpId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Prefix" Type="varchar" Nullable="false" MaxLength="5" />
   </EntityType>
   <EntityType Name="ProjectAndDocument">
     <Key>
@@ -280,6 +296,33 @@
     <Property Name="ADAcount" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="Role" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+      警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
+      -->
+  <EntityType Name="ProjectAndUsersView">
+    <Key>
+      <PropertyRef Name="PAUId" />
+      <PropertyRef Name="ProjectNo" />
+      <PropertyRef Name="ProjectName" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="UserEmail" />
+      <PropertyRef Name="EndDate" />
+      <PropertyRef Name="StartDate" />
+      <PropertyRef Name="InProjectStatus" />
+      <PropertyRef Name="IsAdmin" />
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="PAUId" Type="bigint" Nullable="false" />
+    <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
+    <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="InProjectStatus" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
   <Function Name="decryptPWD" ReturnType="varchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="KEY" Type="varchar" Mode="In" />

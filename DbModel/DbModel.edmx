@@ -30,6 +30,20 @@
           <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.Store.WinbondUserAndGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.Store.WinbondUserAndProject" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="WinbondUsers" EntityType="DbModel.Store.WinbondUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
+            <DefiningQuery>SELECT 
+      [ProjectAndUsersView].[PAUId] AS [PAUId], 
+      [ProjectAndUsersView].[ProjectNo] AS [ProjectNo], 
+      [ProjectAndUsersView].[ProjectName] AS [ProjectName], 
+      [ProjectAndUsersView].[UserId] AS [UserId], 
+      [ProjectAndUsersView].[UserEmail] AS [UserEmail], 
+      [ProjectAndUsersView].[EndDate] AS [EndDate], 
+      [ProjectAndUsersView].[StartDate] AS [StartDate], 
+      [ProjectAndUsersView].[InProjectStatus] AS [InProjectStatus], 
+      [ProjectAndUsersView].[IsAdmin] AS [IsAdmin], 
+      [ProjectAndUsersView].[ProjectId] AS [ProjectId]
+      FROM [dbo].[ProjectAndUsersView] AS [ProjectAndUsersView]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
         <EntityType Name="CompanyIPList">
           <Key>
@@ -171,12 +185,14 @@
           <Key>
             <PropertyRef Name="ProjectNo" />
           </Key>
-          <Property Name="ProjectNo" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="ProjectName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" StoreGeneratedPattern="Computed" />
+          <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="NDAId" Type="bigint" />
+          <Property Name="NDAId" Type="bigint" Nullable="false" />
+          <Property Name="TmpId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Prefix" Type="varchar" Nullable="false" MaxLength="5" />
         </EntityType>
         <EntityType Name="ProjectAndDocument">
           <Key>
@@ -286,6 +302,33 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="Role" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
+        <!--產生期間發現錯誤:
+      警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
+      -->
+        <EntityType Name="ProjectAndUsersView">
+          <Key>
+            <PropertyRef Name="PAUId" />
+            <PropertyRef Name="ProjectNo" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserEmail" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="InProjectStatus" />
+            <PropertyRef Name="IsAdmin" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="PAUId" Type="bigint" Nullable="false" />
+          <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
+          <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="InProjectStatus" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="ProjectId" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
         <Function Name="decryptPWD" ReturnType="varchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="KEY" Type="varchar" Mode="In" />
           <Parameter Name="PWD" Type="varchar" Mode="In" />
@@ -312,7 +355,6 @@
           <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
           <EntitySet Name="NDAs" EntityType="DbModel.NDAs" />
           <EntitySet Name="NDAUpdateLog" EntityType="DbModel.NDAUpdateLog" />
-          <EntitySet Name="Project" EntityType="DbModel.Project" />
           <EntitySet Name="ProjectAndDocument" EntityType="DbModel.ProjectAndDocument" />
           <EntitySet Name="ProjectAndUsers" EntityType="DbModel.ProjectAndUsers" />
           <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
@@ -323,6 +365,8 @@
           <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.WinbondUserAndGroup" />
           <EntitySet Name="WinbondUserAndProject" EntityType="DbModel.WinbondUserAndProject" />
           <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
+          <EntitySet Name="Project" EntityType="DbModel.Project" />
+          <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.ProjectAndUsersView" />
         </EntityContainer>
         <EntityType Name="CompanyIPList">
           <Key>
@@ -460,17 +504,6 @@
           <Property Type="Int64" Name="NDANo" Nullable="false" />
           <Property Type="String" Name="NDAName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="ProjectNo" />
-          </Key>
-          <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="CreateDate" />
-          <Property Type="DateTime" Name="LastUpdate" />
-          <Property Type="DateTime" Name="StartDate" Nullable="false" />
-          <Property Type="Int64" Name="NDAId" />
-        </EntityType>
         <EntityType Name="ProjectAndDocument">
           <Key>
             <PropertyRef Name="ProjectNo" />
@@ -578,6 +611,43 @@
           <Property Type="String" Name="ADAcount" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="IsActive" />
           <Property Type="String" Name="Role" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectNo" />
+          </Key>
+          <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="DateTime" Name="LastUpdate" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="Int64" Name="NDAId" Nullable="false" />
+          <Property Type="Int64" Name="TmpId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Prefix" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProjectAndUsersView">
+          <Key>
+            <PropertyRef Name="PAUId" />
+            <PropertyRef Name="ProjectNo" />
+            <PropertyRef Name="ProjectName" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserEmail" />
+            <PropertyRef Name="EndDate" />
+            <PropertyRef Name="StartDate" />
+            <PropertyRef Name="InProjectStatus" />
+            <PropertyRef Name="IsAdmin" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Type="Int64" Name="PAUId" Nullable="false" />
+          <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="String" Name="InProjectStatus" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
+          <Property Type="String" Name="ProjectId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -731,18 +801,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Project">
-            <EntityTypeMapping TypeName="DbModel.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="NDAId" ColumnName="NDAId" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProjectAndDocument">
             <EntityTypeMapping TypeName="DbModel.ProjectAndDocument">
               <MappingFragment StoreEntitySet="ProjectAndDocument">
@@ -855,6 +913,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="DbModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="TmpId" ColumnName="TmpId" />
+                <ScalarProperty Name="NDAId" ColumnName="NDAId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectAndUsersView">
+            <EntityTypeMapping TypeName="DbModel.ProjectAndUsersView">
+              <MappingFragment StoreEntitySet="ProjectAndUsersView">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="InProjectStatus" ColumnName="InProjectStatus" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+                <ScalarProperty Name="PAUId" ColumnName="PAUId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -890,7 +978,6 @@
         <EntityTypeShape EntityType="DbModel.MainFunction" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5506396484375102" />
         <EntityTypeShape EntityType="DbModel.NDAs" Width="1.5" PointX="0.75" PointY="8.75" Height="2.4746101888020746" />
         <EntityTypeShape EntityType="DbModel.NDAUpdateLog" Width="1.5" PointX="8.75" PointY="3.75" Height="1.9202278645833246" />
-        <EntityTypeShape EntityType="DbModel.Project" Width="1.5" PointX="8.75" PointY="6.75" Height="2.1050219726562602" />
         <EntityTypeShape EntityType="DbModel.ProjectAndDocument" Width="1.5" PointX="6.75" PointY="9.75" Height="1.3658455403645746" />
         <EntityTypeShape EntityType="DbModel.ProjectAndUsers" Width="1.5" PointX="8.75" PointY="9.75" Height="2.659404296874996" />
         <EntityTypeShape EntityType="DbModel.SubFunction" Width="1.5" PointX="10.75" PointY="0.75" Height="2.1050219726562602" />
@@ -901,6 +988,8 @@
         <EntityTypeShape EntityType="DbModel.WinbondUserAndGroup" Width="1.5" PointX="12.75" PointY="0.75" Height="1.7354337565104174" />
         <EntityTypeShape EntityType="DbModel.WinbondUserAndProject" Width="1.5" PointX="12.75" PointY="3.75" Height="1.7354337565104174" />
         <EntityTypeShape EntityType="DbModel.WinbondUsers" Width="1.5" PointX="4.75" PointY="12.75" Height="1.5506396484374818" />
+        <EntityTypeShape EntityType="DbModel.Project" Width="1.5" PointX="0.75" PointY="13.75" Height="2.4746101888020746" />
+        <EntityTypeShape EntityType="DbModel.ProjectAndUsersView" Width="1.5" PointX="13.375" PointY="6.75" Height="2.8441984049479174" />
       </Diagram>
     </Diagrams>
   </Designer>

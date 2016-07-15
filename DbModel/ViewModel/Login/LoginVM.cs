@@ -16,5 +16,8 @@ namespace DbModel.ViewModel.Login
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        [DisplayName("專案"),Required]
+        public string ProjectNo { get; set; }
     }
 }

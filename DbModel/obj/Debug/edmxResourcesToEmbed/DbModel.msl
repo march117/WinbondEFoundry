@@ -147,18 +147,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Project">
-      <EntityTypeMapping TypeName="DbModel.Project">
-        <MappingFragment StoreEntitySet="Project">
-          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ProjectAndDocument">
       <EntityTypeMapping TypeName="DbModel.ProjectAndDocument">
         <MappingFragment StoreEntitySet="ProjectAndDocument">
@@ -268,6 +256,36 @@
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ADAcount" ColumnName="ADAcount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project">
+      <EntityTypeMapping TypeName="DbModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+          <ScalarProperty Name="TmpId" ColumnName="TmpId" />
+          <ScalarProperty Name="NDAId" ColumnName="NDAId" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectAndUsersView">
+      <EntityTypeMapping TypeName="DbModel.ProjectAndUsersView">
+        <MappingFragment StoreEntitySet="ProjectAndUsersView">
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="InProjectStatus" ColumnName="InProjectStatus" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="PAUId" ColumnName="PAUId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

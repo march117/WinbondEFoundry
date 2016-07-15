@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Security.Principal;
 using Newtonsoft.Json;
 using DbModel;
+using DbModel.ViewModel.User;
 namespace Library.Filter
 {
     public class UserDataHandler : ActionFilterAttribute
@@ -21,7 +22,7 @@ namespace Library.Filter
                 if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
                 {
                     FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
-                    filterContext.Controller.ViewBag.UserProfile = JsonConvert.DeserializeObject<UserProfile>(ticket.UserData);
+                    filterContext.Controller.ViewBag.UserProfile = JsonConvert.DeserializeObject<UserProfileVM>(ticket.UserData);
                 }
             }             
         }

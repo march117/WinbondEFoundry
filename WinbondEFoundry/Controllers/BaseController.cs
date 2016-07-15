@@ -49,7 +49,7 @@ namespace WinbondEFoundry.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Exclude = "CreateDate,Creater,Password")]T g)
+        public ActionResult Edit(T g)
         {
             if (ModelState.IsValid)
             {

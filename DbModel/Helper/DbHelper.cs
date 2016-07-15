@@ -16,9 +16,19 @@ namespace DbModel.Helper
         /// <summary>
         /// 新增資料
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="model">新增的資料</param>
         public static void Insert<T>(T model) where T : class
+        {
+            Insert(new T[] { model });
+        }
+
+        /// <summary>
+        /// 寫入多筆資料
+        /// </summary>
+        /// <typeparam name="T">Entity類別</typeparam>
+        /// <param name="models">Entity物件</param>
+        public static void Insert<T>(T[] models) where T : class
         {
             using (DbContext db = new EFoundryContext())
             {
@@ -27,28 +37,32 @@ namespace DbModel.Helper
 
                 #region 將指定欄位進行加密
 
-                List<string> memberName = modelType.GetMembers().Select(o=>o.Name).ToList();
+                List<string> memberName = modelType.GetMembers().Select(o => o.Name).ToList();
                 List<string> encryptCols = EncryptColumns();
-                if (encryptCols.Any(o=>memberName.Contains(o)))
+                foreach (T model in models)
                 {
-                    foreach (string col in encryptCols.Where(o=>memberName.Contains(o)))
+                    if (encryptCols.Any(o => memberName.Contains(o)))
                     {
-                        MethodInfo getPwd = modelType.GetMethod("get_"+col);
-                        string pwd = (string)getPwd.Invoke(model, null);
-                        if (!string.IsNullOrEmpty(pwd))
+                        foreach (string col in encryptCols.Where(o => memberName.Contains(o)))
                         {
-                            string encryptPwd = SecureUtil.Encrypt(pwd);
-                            MethodInfo setPwd = modelType.GetMethod("set_" + col);
-                            setPwd.Invoke(model, new object[] { encryptPwd });
+                            MethodInfo getPwd = modelType.GetMethod("get_" + col);
+                            string pwd = (string)getPwd.Invoke(model, null);
+                            if (!string.IsNullOrEmpty(pwd))
+                            {
+                                string encryptPwd = SecureUtil.Encrypt(pwd);
+                                MethodInfo setPwd = modelType.GetMethod("set_" + col);
+                                setPwd.Invoke(model, new object[] { encryptPwd });
+                            }
                         }
                     }
                 }
+                
 
                 #endregion
 
-                dbSet.Add(model);
+                dbSet.AddRange(models);
                 db.SaveChanges();
-                
+
             }
         }
 
@@ -59,27 +73,33 @@ namespace DbModel.Helper
         /// <summary>
         /// 更新資料，需在Metadata定義KeyAttribute
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="model">更新資料</param>
         public static void Update<T>(T model)where T : class
         {
             using (DbContext db = new EFoundryContext())
             {
-                //Type modelType = typeof(T);
-                //DbSet<T> dbSet = GetDbSet<T>(db);
-                //object keyVal = GetPKColumnValue<T>(model);                
-                //T old = dbSet.Find(keyVal);
-                ////避免Create Date被覆寫
-                //MethodInfo getCreateDt = typeof(T).GetMethod("get_CreateDate");
-                //DateTime oldDt = (DateTime)getCreateDt.Invoke(old, null);
-                //if (oldDt != null)
-                //{
-                //    MethodInfo setCreateDt = typeof(T).GetMethod("set_CreateDate");
-                //    setCreateDt.Invoke(model, new object[]{oldDt});
-                //}
+                Type modelType = typeof(T);
+                DbSet<T> dbSet = GetDbSet<T>(db);
+                object keyVal = GetPKColumnValue<T>(model);
+                T old = dbSet.Find(keyVal);
+                List<string> memberName = modelType.GetMembers().Select(o => o.Name).ToList();
+                List<string> excludeCols = UpdateExcludeColumn();
+                if (excludeCols.Any(o => memberName.Contains(o)))
+                {
+                    foreach (string col in excludeCols.Where(o => memberName.Contains(o)))
+                    {
+                        MethodInfo getMethod = modelType.GetMethod("get_" + col);
+                        object val = getMethod.Invoke(old, null);
+                        if (val != null)
+                        {
+                            MethodInfo setMethod = modelType.GetMethod("set_" + col);
+                            setMethod.Invoke(model, new object[] { val });
+                        }
+                    }
+                }
 
-                //db.Entry(old).CurrentValues.SetValues(model);                
-                db.Entry(model).State = EntityState.Modified;
+                db.Entry(old).CurrentValues.SetValues(model);                
 
                 db.SaveChanges();
             }
@@ -92,7 +112,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 刪除資料,需在Metadata定義KeyAttribute
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="id">Primary Key</param>
         public static void Delete<T>(int id) where T : class
         {
@@ -102,7 +122,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 刪除資料,需在Metadata定義KeyAttribute
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="id">Primary Key</param>
         public static void Delete<T>(string id) where T : class
         {
@@ -112,7 +132,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 刪除資料,需在Metadata定義KeyAttribute
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="id">Primary Key</param>
         public static void Delete<T>(int[] id) where T : class
         {
@@ -122,7 +142,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 刪除資料,需在Metadata定義KeyAttribute
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="id">Primary Key</param>
         public static void Delete<T>(string[] id)where T : class
         {
@@ -144,6 +164,19 @@ namespace DbModel.Helper
             }
         }
 
+        /// <summary>
+        /// 傳入委派條件，刪除資料
+        /// </summary>
+        /// <typeparam name="T">Entity類別</typeparam>
+        /// <param name="pre">委派條件</param>
+        public static void Delete<T>(Func<T, bool> pre) where T : class
+        {
+            using(EFoundryContext db = new EFoundryContext()){
+                DbSet<T> dbSet = GetDbSet<T>(db);
+                dbSet.RemoveRange(GetList<T>(pre));
+                db.SaveChanges();
+            }
+        }
         #endregion
 
         #region 取得單一物件
@@ -151,7 +184,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得單一物件
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="id">Primary Key</param>
         /// <returns>物件</returns>
         public static T GetItem<T>(string id) where T:class
@@ -179,7 +212,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得單一物件
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="pre">Func條件</param>
         /// <returns>物件</returns>
         public static T GetItem<T>(Func<T, bool> pre) where T : class
@@ -198,7 +231,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得不分頁列表
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <returns>列表</returns>
         public static List<T> GetList<T>() where T : class
         {
@@ -208,7 +241,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得分頁列表
         /// </summary>
-        /// <typeparam name="T">Entity物件</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="pageIdx">頁次</param>
         /// <param name="pageSize">每頁比數</param>
         /// <returns>分頁列表</returns>
@@ -273,7 +306,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得主鍵欄位值
         /// </summary>
-        /// <typeparam name="T">Entity物件型別</typeparam>
+        /// <typeparam name="T">Entity類別</typeparam>
         /// <param name="model">Entity物件</param>
         /// <returns>主鍵值</returns>
         static object GetPKColumnValue<T>(T model) where T : class
@@ -287,7 +320,7 @@ namespace DbModel.Helper
         /// <summary>
         /// 取得DbSet物件
         /// </summary>
-        /// <typeparam name="T">Entity物件型別</typeparam>
+        /// <typeparam name="T">Entity類別型別</typeparam>
         /// <param name="db">DbContext</param>
         /// <returns>DbSet</returns>
         static DbSet<T> GetDbSet<T>(DbContext db) where T : class{
@@ -311,6 +344,17 @@ namespace DbModel.Helper
             return cols;
         }
 
+        /// <summary>
+        /// 更新時不需異動的欄位
+        /// </summary>
+        /// <returns></returns>
+        static List<string> UpdateExcludeColumn()
+        {
+            List<string> cols = new List<string>();
+            cols.Add("CreateDate");
+            cols.Add("Creater");
+            return cols;
+        }
         #endregion
     }
 }

@@ -5,9 +5,45 @@
 }
 
 <h2>登入</h2>
+<style>
+    .projectNoWidget
+    {
+        display:none;
+    }
+</style>
+<script>
+    var verificationUser = function () {
+        $.ajax({
+            url: "/Login/GetProjectByUser",
+            type: "post",
+            data: $("#loginForm").serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    for (var i in data) {
+                        var p = data[i];
+                        var opt = $("<option/>");
+                        opt.text(p.ProjectName);
+                        opt.val(p.ProjectNo);
+                        console.log(opt);
+                        $("select[name='ProjectNo']").append(opt);
+                    }
+                    $(".projectNoWidget").show();
+                    $(".verifyWidget").hide();
+                } else {
+                    alert("Login Fail");
+                }
+            }
+        });
+    }
+
+    var formSubmit = function () {
+        $("#loginForm").submit();
+    }
+</script>
 @ViewBag.isLogin
 @ViewBag.UserProfile
-<form action="@Url.Action("Index")" method="post">
+<form action="@Url.Action("Index")" method="post" id="loginForm">
     @Html.AntiForgeryToken()
     <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]"/>
     <table>
@@ -19,8 +55,19 @@
             <td>@Html.LabelFor(o=>o.Password)</td>
             <td>@Html.PasswordFor(o=>o.Password)</td>
         </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="send" /></td>
+        <tr class="verifyWidget">
+            <td colspan="2"><input type="button" value="verification" onclick="verificationUser()"/></td>
+        </tr>
+        <tr class="projectNoWidget">
+            <td>@Html.LabelFor(o=>o.ProjectNo)</td>
+            <td>
+                <select name="ProjectNo">
+                    <option value="">請選擇</option>
+                </select>
+            </td>
+        </tr>        
+        <tr class="projectNoWidget">
+            <td colspan="2"><input type="button" value="send" onclick="formSubmit()"/></td>
         </tr>
     </table>
 </form>

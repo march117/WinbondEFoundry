@@ -19,6 +19,8 @@ namespace DbModel
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public System.DateTime StartDate { get; set; }
-        public Nullable<long> NDAId { get; set; }
+        public long NDAId { get; set; }
+        public long TmpId { get; set; }
+        public string Prefix { get; set; }
     }
 }

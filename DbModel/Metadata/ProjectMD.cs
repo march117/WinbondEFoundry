@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 namespace DbModel
 {
+    [MetadataType(typeof(ProjectMD))]
     public partial class Project
     {
         public Project()
@@ -16,7 +17,7 @@ namespace DbModel
 
     public partial class ProjectMD
     {
-        [DisplayName("專案編號"),Required]
+        [DisplayName("專案編號"),Required,Key]
         public string ProjectNo { get; set; }
 
         [DisplayName("專案名稱"), Required]
@@ -33,5 +34,8 @@ namespace DbModel
 
         [DisplayName("合約編號"), Required]
         public Nullable<long> NDAId { get; set; }
+
+        public long TmpId { get; set; }
+        public string Prefix { get; set; }
     }
 }

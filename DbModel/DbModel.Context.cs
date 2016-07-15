@@ -38,7 +38,6 @@ namespace DbModel
         public DbSet<MainFunction> MainFunction { get; set; }
         public DbSet<NDAs> NDAs { get; set; }
         public DbSet<NDAUpdateLog> NDAUpdateLog { get; set; }
-        public DbSet<Project> Project { get; set; }
         public DbSet<ProjectAndDocument> ProjectAndDocument { get; set; }
         public DbSet<ProjectAndUsers> ProjectAndUsers { get; set; }
         public DbSet<SubFunction> SubFunction { get; set; }
@@ -49,5 +48,7 @@ namespace DbModel
         public DbSet<WinbondUserAndGroup> WinbondUserAndGroup { get; set; }
         public DbSet<WinbondUserAndProject> WinbondUserAndProject { get; set; }
         public DbSet<WinbondUsers> WinbondUsers { get; set; }
+        public DbSet<Project> Project { get; set; }
+        public DbSet<ProjectAndUsersView> ProjectAndUsersView { get; set; }
     }
 }
