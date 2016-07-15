@@ -1,0 +1,29 @@
+﻿@using DbModel
+@using DbModel.ViewModel.User
+@using DbModel.ViewModel.SubFunction
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        List<MainFunction> mainFuncList = ViewBag.MainFunction;
+        UserProfileVM uVM = ViewBag.UserProfile;
+        List<SubFunctionVM> subFuncList = uVM.SubFunctionList;
+        <ul>
+            @foreach (MainFunction mainFunc in mainFuncList)
+            {
+                <li>@mainFunc.FunctionName</li>
+                if (subFuncList.Any(o => o.MainFunctionId == mainFunc.FunctionId))
+                {
+                    <ul>
+                        @foreach (SubFunctionVM subFunc in subFuncList.Where(o => o.MainFunctionId == mainFunc.FunctionId))
+                        {
+                            <li>@subFunc.SubFunctionName</li>   
+                        }
+                    </ul>
+                }
+            }
+        </ul>
+    }   
+}
+
+
+

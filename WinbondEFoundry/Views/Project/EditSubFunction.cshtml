@@ -1,0 +1,24 @@
+﻿@using DbModel
+@model List<ProjectAndSubFunctionView>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "_SubFunctionForm";
+    string action = (string)ViewContext.RouteData.Values["action"];
+    Project p = (Project)ViewBag.Project;
+    List<long> defaultSubFuncs = null;
+    if(Model != null){
+        defaultSubFuncs = Model.Select(o => o.SubFunctionId).ToList();
+    }
+}
+
+<h2>Project Name:@p.ProjectName</h2>
+<form action="@Url.Action(action)" method="post">
+    @Html.Hidden("ProjectNo",p.ProjectNo)
+    <ul>
+        @foreach(SubFunction subFunc in ViewBag.SubFuncList){
+            <li><input type="checkbox" name="subFuncId" value="@subFunc.SubFunctionId" @(defaultSubFuncs != null && defaultSubFuncs.Contains(subFunc.SubFunctionId) ? "checked" : "")/>@subFunc.SubFunctionName</li>    
+        }        
+    </ul>
+
+    <input type="submit" value="Submit" />
+</form>

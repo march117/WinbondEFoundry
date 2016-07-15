@@ -1,0 +1,52 @@
+﻿@using DbModel
+@model ProjectAndUsers
+@{
+    string action = (string)ViewContext.RouteData.Values["action"];   
+    Project p = (Project)ViewBag.Project;
+}
+
+<form action="@Url.Action(action)" method="post">
+    @if (action == "EditUser")
+    {
+        @Html.HiddenFor(o => o.PAUId)
+        @Html.HiddenFor(o => o.ProjectId)
+    }
+    else
+    {
+        @Html.Hidden("ProjectId", @p.ProjectNo)
+    }
+    
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o => o.UserId)</td>
+            <td>
+                <select name="UserId">
+                    <option value="">請選擇</option>
+                    @foreach (UserProfile u in ViewBag.UserList)
+                    {
+                        <option value="@u.UserId" @(Model != null && u.UserId == Model.UserId ? "selected" : "")>@u.UserEmail</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.IsAdmin)</td>
+            <td>@Html.CheckBoxFor(o => o.IsAdmin)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.InProjectStatus)</td>
+            <td>@Html.TextBoxFor(o => o.InProjectStatus)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.StartDate)</td>
+            <td>@Html.TextBoxFor(o => o.StartDate, new { @type = "date", @Value = (Model != null ? Model.StartDate.ToString("yyyy-MM-dd") : "") })</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o => o.EndDate)</td>
+            <td>@Html.TextBoxFor(o=>o.EndDate,new{@type = "date",@Value = (Model != null?Model.EndDate.ToString("yyyy-MM-dd"):"")})</td>
+        </tr>
+        <tr>
+            <td colsapn="2"><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>

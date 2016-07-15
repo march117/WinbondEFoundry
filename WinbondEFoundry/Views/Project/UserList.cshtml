@@ -1,0 +1,19 @@
+﻿@using DbModel
+@using DbModel.ViewModel.Project
+@model List<ProjectAndUsersView>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Project p = (Project)ViewBag.Project;
+}
+<h2>Project Name:@p.ProjectName</h2>
+<a href="@Url.Action("AddUser", new { @id=p.ProjectNo})">Add User</a>
+<form action="@Url.Action("DeleteUser", new { @id = p.ProjectNo})" method="post">
+    <ul>
+        @foreach (ProjectAndUsersView pau in Model)
+        {
+            <li><input type="checkbox" value="@pau.PAUId" name="pauId" /><a href="@Url.Action("EditUser", new {@id = pau.PAUId })">@pau.UserEmail</a></li>
+        }    
+    </ul>
+    <input type="submit" value="submit" />
+</form>
+

@@ -1,0 +1,47 @@
+﻿@using DbModel
+@model NDAs
+@{
+    ViewBag.Title = "_Form";
+    string action = (string)ViewContext.RouteData.Values["action"];    
+}
+@ViewBag.Model
+<form method="post" action="@Url.Action(action)">
+    @if (action == "Edit")
+    {
+        @Html.HiddenFor(o => o.NDAId);
+    }
+    @Html.HiddenFor(o => o.CreateDate, new {@Value = DateTime.Now })
+    <table>
+        <tr>
+            <td>@Html.LabelFor(o=>o.NDANo)</td>
+            <td>@Html.TextBoxFor(o => o.NDANo)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.NDAName)</td>
+            <td>@Html.TextBoxFor(o => o.NDAName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.CompanyNo)</td>
+            <td>
+                <select name="CompanyNo">
+                    <option value="">請選擇</option>
+                    @foreach (CompanyProfile c in ViewBag.CompanyList)
+                    {
+                        <option value="@c.CompanyNo" @(Model != null && c.CompanyNo == Model.CompanyNo?"selected":"")>@c.CompanyName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.StartDate)</td>
+            <td>@Html.TextBoxFor(o => o.StartDate, new { @type="date",@Value=(Model != null?Model.StartDate.ToString("yyyy-MM-dd"):"")})</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(o=>o.EndDate)</td>
+            <td>@Html.TextBoxFor(o => o.EndDate, new { @type = "date", @Value = (Model != null ? Model.EndDate.ToString("yyyy-MM-dd") : "") })</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="send" /></td>
+        </tr>
+    </table>    
+</form>

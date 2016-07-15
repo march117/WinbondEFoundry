@@ -1,0 +1,17 @@
+﻿@using DbModel
+@model List<NDAs>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<form action="@Url.Action("DeleteItem")" method="post">
+    <ul>
+        @foreach (NDAs n in Model)
+        {        
+            <li><input type="checkbox" value="@n.NDAId" name="id" /><a href="@Url.Action("Edit", new { @id = n.NDAId })">@n.NDAName</a></li>
+        }
+    </ul>
+    <input type="submit" value="Submit" />
+</form>
+

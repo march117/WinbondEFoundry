@@ -1,0 +1,21 @@
+﻿@using DbModel
+@model List<Project>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<form action="@Url.Action("DeleteItem")" method="post">
+    <ul>
+        @foreach (Project p in Model)
+        {        
+            <li>
+                <input type="checkbox" value="@p.ProjectNo" name="id" /><a href="@Url.Action("Edit", new { @id = p.ProjectNo })">@p.ProjectName</a>&nbsp;
+                <a href="@Url.Action("UserList", new { @id = p.ProjectNo})">Edit User</a>
+                <a href="@Url.Action("EditSubFunction", new {@id = p.ProjectNo })">Edit SubFunction</a>
+            </li>
+        }
+    </ul>
+    <input type="submit" value="Submit" />
+</form>
+
