@@ -11,14 +11,11 @@
     <EntitySet Name="DocumentWithAttr" EntityType="DbModel.DocumentWithAttr" />
     <EntitySet Name="DownloadHistory" EntityType="DbModel.DownloadHistory" />
     <EntitySet Name="Groups" EntityType="DbModel.Groups" />
-    <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
     <EntitySet Name="NDAs" EntityType="DbModel.NDAs" />
     <EntitySet Name="NDAUpdateLog" EntityType="DbModel.NDAUpdateLog" />
     <EntitySet Name="ProjectAndDocument" EntityType="DbModel.ProjectAndDocument" />
     <EntitySet Name="ProjectAndUsers" EntityType="DbModel.ProjectAndUsers" />
-    <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
     <EntitySet Name="tmp_documentGroupAndProject" EntityType="DbModel.tmp_documentGroupAndProject" />
-    <EntitySet Name="UserAndFunction" EntityType="DbModel.UserAndFunction" />
     <EntitySet Name="UserProfile" EntityType="DbModel.UserProfile" />
     <EntitySet Name="WinbondGroupAndFuntion" EntityType="DbModel.WinbondGroupAndFuntion" />
     <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.WinbondUserAndGroup" />
@@ -26,7 +23,10 @@
     <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
     <EntitySet Name="Project" EntityType="DbModel.Project" />
     <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.ProjectAndUsersView" />
+    <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
+    <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
     <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.ProjectAndSubFunctionView" />
+    <EntitySet Name="UserAndFunction" EntityType="DbModel.UserAndFunction" />
   </EntityContainer>
   <EntityType Name="CompanyIPList">
     <Key>
@@ -132,14 +132,6 @@
     <Property Type="Boolean" Name="IsActive" Nullable="false" />
     <Property Type="DateTime" Name="CreateDate" />
   </EntityType>
-  <EntityType Name="MainFunction">
-    <Key>
-      <PropertyRef Name="FunctionId" />
-    </Key>
-    <Property Type="Int64" Name="FunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="FunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Type="Boolean" Name="IsActive" Nullable="false" />
-  </EntityType>
   <EntityType Name="NDAs">
     <Key>
       <PropertyRef Name="NDAId" />
@@ -186,17 +178,6 @@
     <Property Type="DateTime" Name="StartDate" Nullable="false" />
     <Property Type="DateTime" Name="EndDate" Nullable="false" />
   </EntityType>
-  <EntityType Name="SubFunction">
-    <Key>
-      <PropertyRef Name="SubFunctionId" />
-    </Key>
-    <Property Type="Int64" Name="SubFunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
-    <Property Type="Int64" Name="ParentFunctionId" />
-    <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="CreateDate" />
-    <Property Type="Boolean" Name="IsActive" Nullable="false" />
-  </EntityType>
   <EntityType Name="tmp_documentGroupAndProject">
     <Key>
       <PropertyRef Name="GroupNo" />
@@ -204,17 +185,6 @@
     </Key>
     <Property Type="String" Name="GroupNo" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="UserAndFunction">
-    <Key>
-      <PropertyRef Name="SubFuntionNo" />
-      <PropertyRef Name="UserEmail" />
-    </Key>
-    <Property Type="Int64" Name="SubFuntionNo" Nullable="false" />
-    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="ProjectNo" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="CreaterEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="Status" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="UserProfile">
     <Key>
@@ -309,21 +279,53 @@
     <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
     <Property Type="String" Name="ProjectId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="MainFunction">
+    <Key>
+      <PropertyRef Name="FunctionId" />
+    </Key>
+    <Property Type="Int64" Name="FunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="Sort" />
+  </EntityType>
+  <EntityType Name="SubFunction">
+    <Key>
+      <PropertyRef Name="SubFunctionId" />
+    </Key>
+    <Property Type="Int64" Name="SubFunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
+    <Property Type="Int64" Name="ParentFunctionId" />
+    <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreateDate" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="Sort" />
+  </EntityType>
   <EntityType Name="ProjectAndSubFunctionView">
     <Key>
       <PropertyRef Name="ProjectNo" />
       <PropertyRef Name="SubFunctionId" />
       <PropertyRef Name="SubFunctionName" />
       <PropertyRef Name="ProjectName" />
-      <PropertyRef Name="UserEmail" />
       <PropertyRef Name="MainFunctionId" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Type="Int64" Name="SubFunctionId" Nullable="false" />
     <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
     <Property Type="Int64" Name="ParentFunctionId" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserAndFunction">
+    <Key>
+      <PropertyRef Name="SubFuntionNo" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int64" Name="SubFuntionNo" Nullable="false" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="ProjectNo" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="Creater" Nullable="false" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

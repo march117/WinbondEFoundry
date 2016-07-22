@@ -35,14 +35,11 @@ namespace DbModel
         public DbSet<DocumentWithAttr> DocumentWithAttr { get; set; }
         public DbSet<DownloadHistory> DownloadHistory { get; set; }
         public DbSet<Groups> Groups { get; set; }
-        public DbSet<MainFunction> MainFunction { get; set; }
         public DbSet<NDAs> NDAs { get; set; }
         public DbSet<NDAUpdateLog> NDAUpdateLog { get; set; }
         public DbSet<ProjectAndDocument> ProjectAndDocument { get; set; }
         public DbSet<ProjectAndUsers> ProjectAndUsers { get; set; }
-        public DbSet<SubFunction> SubFunction { get; set; }
         public DbSet<tmp_documentGroupAndProject> tmp_documentGroupAndProject { get; set; }
-        public DbSet<UserAndFunction> UserAndFunction { get; set; }
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<WinbondGroupAndFuntion> WinbondGroupAndFuntion { get; set; }
         public DbSet<WinbondUserAndGroup> WinbondUserAndGroup { get; set; }
@@ -50,6 +47,9 @@ namespace DbModel
         public DbSet<WinbondUsers> WinbondUsers { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<ProjectAndUsersView> ProjectAndUsersView { get; set; }
+        public DbSet<MainFunction> MainFunction { get; set; }
+        public DbSet<SubFunction> SubFunction { get; set; }
         public DbSet<ProjectAndSubFunctionView> ProjectAndSubFunctionView { get; set; }
+        public DbSet<UserAndFunction> UserAndFunction { get; set; }
     }
 }

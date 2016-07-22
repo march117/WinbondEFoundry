@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using DbModel;
 using DbModel.ViewModel.User;
-using DbModel.Helper;
-using DbModel.Helper.Project;
+using DbModel.Util;
+using DbModel.Util.Project;
 namespace WinbondEFoundry.Controllers
 {
     public class ProjectController : BaseController<Project>
@@ -15,8 +15,8 @@ namespace WinbondEFoundry.Controllers
         
         public ActionResult UserList(string id)
         {
-            ViewBag.Project = DbHelper.GetItem<Project>(id);
-            return View(DbHelper.GetList<ProjectAndUsersView>(delegate(ProjectAndUsersView pauv)
+            ViewBag.Project = DataUtil.GetItem<Project>(id);
+            return View(DataUtil.GetList<ProjectAndUsersView>(delegate(ProjectAndUsersView pauv)
             {
                 return pauv.ProjectId == id;
             }));
@@ -24,35 +24,35 @@ namespace WinbondEFoundry.Controllers
 
         public ActionResult AddUser(string id)
         {
-            ViewBag.UserList = DbHelper.GetList<UserProfile>();
-            ViewBag.Project = DbHelper.GetItem<Project>(id);
+            ViewBag.UserList = DataUtil.GetList<UserProfile>();
+            ViewBag.Project = DataUtil.GetItem<Project>(id);
             return View();
         }       
 
         [HttpPost]
         public ActionResult AddUser(ProjectAndUsers pau)
         {
-            DbHelper.Insert<ProjectAndUsers>(pau);
+            DataUtil.Insert<ProjectAndUsers>(pau);
 
             return RedirectToAction("UserList", new { id = pau.ProjectId });
         }
 
         public ActionResult EditUser(string id)
         {
-            ViewBag.UserList = DbHelper.GetList<UserProfile>();
-            return View(DbHelper.GetItem<ProjectAndUsers>(id));
+            ViewBag.UserList = DataUtil.GetList<UserProfile>();
+            return View(DataUtil.GetItem<ProjectAndUsers>(id));
         }
 
         [HttpPost]
         public ActionResult EditUser(ProjectAndUsers pau)
         {            
-            DbHelper.Update<ProjectAndUsers>(pau);
+            DataUtil.Update<ProjectAndUsers>(pau);
             return View(pau);
         }
 
         public ActionResult DeleteUser(int[] pauId,string id)
         {
-            DbHelper.Delete<ProjectAndUsers>(pauId);
+            DataUtil.Delete<ProjectAndUsers>(pauId);
             return RedirectToAction("UserList", new { id = id });
         }
 
@@ -62,9 +62,9 @@ namespace WinbondEFoundry.Controllers
 
         public ActionResult EditSubFunction(string id)
         {
-            ViewBag.Project = DbHelper.GetItem<Project>(id);
-            ViewBag.SubFuncList = DbHelper.GetList<SubFunction>();
-            return View(DbHelper.GetList<ProjectAndSubFunctionView>(delegate(ProjectAndSubFunctionView pas)
+            ViewBag.Project = DataUtil.GetItem<Project>(id);
+            ViewBag.SubFuncList = DataUtil.GetList<SubFunction>();
+            return View(DataUtil.GetList<ProjectAndSubFunctionView>(delegate(ProjectAndSubFunctionView pas)
             {
                 return pas.ProjectNo == id;
             }));
@@ -74,7 +74,7 @@ namespace WinbondEFoundry.Controllers
         public ActionResult EditSubFunction(int[] subFuncId, string ProjectNo)
         {
             UserProfileVM uVM = (UserProfileVM)ViewBag.UserProfile;
-            ProjectDataHelper.EditProjectAndSubFunction(subFuncId, ProjectNo, uVM.UserEmail);
+            ProjectDataUtil.EditProjectAndSubFunction(subFuncId, ProjectNo, uVM.UserEmail);
             return RedirectToAction("EditSubFunction", new { id = ProjectNo });
         }
 
@@ -82,7 +82,7 @@ namespace WinbondEFoundry.Controllers
 
         public override void ResourceToEditView()
         {
-            ViewBag.NDAList = DbHelper.GetList<NDAs>();
+            ViewBag.NDAList = DataUtil.GetList<NDAs>();
         }
 
         public override void ResourceToIndexView()

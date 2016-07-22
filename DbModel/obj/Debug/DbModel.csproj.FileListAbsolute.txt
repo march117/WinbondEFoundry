@@ -1,4 +1,3 @@
-C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\obj\Debug\DbModel.csprojResolveAssemblyReference.cache
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\bin\Debug\DbModel.dll.config
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\bin\Debug\DbModel.dll
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\bin\Debug\DbModel.pdb
@@ -8,3 +7,4 @@ C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\bin
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\obj\Debug\DbModel.dll
 C:\Users\MArch\Documents\Visual Studio 2010\Projects\WinbondEFoundry\DbModel\obj\Debug\DbModel.pdb
+C:\Users\MArch\documents\visual studio 2010\Projects\WinbondEFoundry\DbModel\obj\Debug\DbModel.csprojResolveAssemblyReference.cache

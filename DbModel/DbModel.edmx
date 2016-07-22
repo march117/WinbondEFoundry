@@ -36,9 +36,9 @@
       [ProjectAndSubFunctionView].[SubFunctionId] AS [SubFunctionId], 
       [ProjectAndSubFunctionView].[SubFunctionName] AS [SubFunctionName], 
       [ProjectAndSubFunctionView].[ProjectName] AS [ProjectName], 
-      [ProjectAndSubFunctionView].[UserEmail] AS [UserEmail], 
       [ProjectAndSubFunctionView].[MainFunctionId] AS [MainFunctionId], 
-      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId]
+      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId], 
+      [ProjectAndSubFunctionView].[UserId] AS [UserId]
       FROM [dbo].[ProjectAndSubFunctionView] AS [ProjectAndSubFunctionView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
@@ -167,6 +167,7 @@
           <Property Name="FunctionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FunctionName" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Sort" Type="int" />
         </EntityType>
         <EntityType Name="NDAs">
           <Key>
@@ -237,6 +238,7 @@
           <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Sort" Type="int" />
         </EntityType>
         <EntityType Name="tmp_documentGroupAndProject">
           <Key>
@@ -249,12 +251,12 @@
         <EntityType Name="UserAndFunction">
           <Key>
             <PropertyRef Name="SubFuntionNo" />
-            <PropertyRef Name="UserEmail" />
+            <PropertyRef Name="UserId" />
           </Key>
           <Property Name="SubFuntionNo" Type="bigint" Nullable="false" />
-          <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
           <Property Name="ProjectNo" Type="varchar" MaxLength="100" />
-          <Property Name="CreaterEmail" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Creater" Type="bigint" Nullable="false" />
           <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
         <EntityType Name="UserProfile">
@@ -322,16 +324,16 @@
             <PropertyRef Name="SubFunctionId" />
             <PropertyRef Name="SubFunctionName" />
             <PropertyRef Name="ProjectName" />
-            <PropertyRef Name="UserEmail" />
             <PropertyRef Name="MainFunctionId" />
+            <PropertyRef Name="UserId" />
           </Key>
           <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
           <Property Name="SubFunctionId" Type="bigint" Nullable="false" />
           <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="MainFunctionId" Type="bigint" Nullable="false" />
           <Property Name="ParentFunctionId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
         </EntityType>
         <!--產生期間發現錯誤:
       警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。
@@ -383,14 +385,11 @@
           <EntitySet Name="DocumentWithAttr" EntityType="DbModel.DocumentWithAttr" />
           <EntitySet Name="DownloadHistory" EntityType="DbModel.DownloadHistory" />
           <EntitySet Name="Groups" EntityType="DbModel.Groups" />
-          <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
           <EntitySet Name="NDAs" EntityType="DbModel.NDAs" />
           <EntitySet Name="NDAUpdateLog" EntityType="DbModel.NDAUpdateLog" />
           <EntitySet Name="ProjectAndDocument" EntityType="DbModel.ProjectAndDocument" />
           <EntitySet Name="ProjectAndUsers" EntityType="DbModel.ProjectAndUsers" />
-          <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
           <EntitySet Name="tmp_documentGroupAndProject" EntityType="DbModel.tmp_documentGroupAndProject" />
-          <EntitySet Name="UserAndFunction" EntityType="DbModel.UserAndFunction" />
           <EntitySet Name="UserProfile" EntityType="DbModel.UserProfile" />
           <EntitySet Name="WinbondGroupAndFuntion" EntityType="DbModel.WinbondGroupAndFuntion" />
           <EntitySet Name="WinbondUserAndGroup" EntityType="DbModel.WinbondUserAndGroup" />
@@ -398,7 +397,10 @@
           <EntitySet Name="WinbondUsers" EntityType="DbModel.WinbondUsers" />
           <EntitySet Name="Project" EntityType="DbModel.Project" />
           <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.ProjectAndUsersView" />
+          <EntitySet Name="MainFunction" EntityType="DbModel.MainFunction" />
+          <EntitySet Name="SubFunction" EntityType="DbModel.SubFunction" />
           <EntitySet Name="ProjectAndSubFunctionView" EntityType="DbModel.ProjectAndSubFunctionView" />
+          <EntitySet Name="UserAndFunction" EntityType="DbModel.UserAndFunction" />
         </EntityContainer>
         <EntityType Name="CompanyIPList">
           <Key>
@@ -504,14 +506,6 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="DateTime" Name="CreateDate" />
         </EntityType>
-        <EntityType Name="MainFunction">
-          <Key>
-            <PropertyRef Name="FunctionId" />
-          </Key>
-          <Property Type="Int64" Name="FunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-        </EntityType>
         <EntityType Name="NDAs">
           <Key>
             <PropertyRef Name="NDAId" />
@@ -558,17 +552,6 @@
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
           <Property Type="DateTime" Name="EndDate" Nullable="false" />
         </EntityType>
-        <EntityType Name="SubFunction">
-          <Key>
-            <PropertyRef Name="SubFunctionId" />
-          </Key>
-          <Property Type="Int64" Name="SubFunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
-          <Property Type="Int64" Name="ParentFunctionId" />
-          <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="CreateDate" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-        </EntityType>
         <EntityType Name="tmp_documentGroupAndProject">
           <Key>
             <PropertyRef Name="GroupNo" />
@@ -576,17 +559,6 @@
           </Key>
           <Property Type="String" Name="GroupNo" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="UserAndFunction">
-          <Key>
-            <PropertyRef Name="SubFuntionNo" />
-            <PropertyRef Name="UserEmail" />
-          </Key>
-          <Property Type="Int64" Name="SubFuntionNo" Nullable="false" />
-          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ProjectNo" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="CreaterEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Status" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -681,22 +653,54 @@
           <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
           <Property Type="String" Name="ProjectId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="MainFunction">
+          <Key>
+            <PropertyRef Name="FunctionId" />
+          </Key>
+          <Property Type="Int64" Name="FunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="Sort" />
+        </EntityType>
+        <EntityType Name="SubFunction">
+          <Key>
+            <PropertyRef Name="SubFunctionId" />
+          </Key>
+          <Property Type="Int64" Name="SubFunctionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
+          <Property Type="Int64" Name="ParentFunctionId" />
+          <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="Sort" />
+        </EntityType>
         <EntityType Name="ProjectAndSubFunctionView">
           <Key>
             <PropertyRef Name="ProjectNo" />
             <PropertyRef Name="SubFunctionId" />
             <PropertyRef Name="SubFunctionName" />
             <PropertyRef Name="ProjectName" />
-            <PropertyRef Name="UserEmail" />
             <PropertyRef Name="MainFunctionId" />
+            <PropertyRef Name="UserId" />
           </Key>
           <Property Type="String" Name="ProjectNo" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Type="Int64" Name="SubFunctionId" Nullable="false" />
           <Property Type="String" Name="SubFunctionName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="Int64" Name="MainFunctionId" Nullable="false" />
           <Property Type="Int64" Name="ParentFunctionId" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAndFunction">
+          <Key>
+            <PropertyRef Name="SubFuntionNo" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int64" Name="SubFuntionNo" Nullable="false" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="ProjectNo" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="Creater" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -816,15 +820,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MainFunction">
-            <EntityTypeMapping TypeName="DbModel.MainFunction">
-              <MappingFragment StoreEntitySet="MainFunction">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
-                <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NDAs">
             <EntityTypeMapping TypeName="DbModel.NDAs">
               <MappingFragment StoreEntitySet="NDAs">
@@ -873,34 +868,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SubFunction">
-            <EntityTypeMapping TypeName="DbModel.SubFunction">
-              <MappingFragment StoreEntitySet="SubFunction">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
-                <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
-                <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
-                <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tmp_documentGroupAndProject">
             <EntityTypeMapping TypeName="DbModel.tmp_documentGroupAndProject">
               <MappingFragment StoreEntitySet="tmp_documentGroupAndProject">
                 <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
                 <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserAndFunction">
-            <EntityTypeMapping TypeName="DbModel.UserAndFunction">
-              <MappingFragment StoreEntitySet="UserAndFunction">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CreaterEmail" ColumnName="CreaterEmail" />
-                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -992,16 +964,50 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MainFunction">
+            <EntityTypeMapping TypeName="DbModel.MainFunction">
+              <MappingFragment StoreEntitySet="MainFunction">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
+                <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubFunction">
+            <EntityTypeMapping TypeName="DbModel.SubFunction">
+              <MappingFragment StoreEntitySet="SubFunction">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
+                <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
+                <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
+                <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProjectAndSubFunctionView">
             <EntityTypeMapping TypeName="DbModel.ProjectAndSubFunctionView">
               <MappingFragment StoreEntitySet="ProjectAndSubFunctionView">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
                 <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
                 <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
                 <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
                 <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAndFunction">
+            <EntityTypeMapping TypeName="DbModel.UserAndFunction">
+              <MappingFragment StoreEntitySet="UserAndFunction">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Creater" ColumnName="Creater" />
+                <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1026,7 +1032,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="DbModel">
+      <Diagram Name="DbModel" ZoomLevel="86">
         <EntityTypeShape EntityType="DbModel.CompanyIPList" Width="1.5" PointX="0.75" PointY="0.75" Height="1.3658455403645746" />
         <EntityTypeShape EntityType="DbModel.CompanyProfile" Width="1.5" PointX="2.75" PointY="0.75" Height="2.2898160807291674" />
         <EntityTypeShape EntityType="DbModel.DocumentAttr" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9202278645833246" />
@@ -1037,14 +1043,11 @@
         <EntityTypeShape EntityType="DbModel.DocumentWithAttr" Width="1.5" PointX="6.75" PointY="3.75" Height="1.7354337565104174" />
         <EntityTypeShape EntityType="DbModel.DownloadHistory" Width="1.5" PointX="4.75" PointY="6.75" Height="2.4746101888020746" />
         <EntityTypeShape EntityType="DbModel.Groups" Width="1.5" PointX="6.75" PointY="6.75" Height="1.7354337565104174" />
-        <EntityTypeShape EntityType="DbModel.MainFunction" Width="1.5" PointX="8.75" PointY="0.75" Height="1.5506396484375102" />
         <EntityTypeShape EntityType="DbModel.NDAs" Width="1.5" PointX="0.75" PointY="8.75" Height="2.4746101888020746" />
         <EntityTypeShape EntityType="DbModel.NDAUpdateLog" Width="1.5" PointX="8.75" PointY="3.75" Height="1.9202278645833246" />
         <EntityTypeShape EntityType="DbModel.ProjectAndDocument" Width="1.5" PointX="6.75" PointY="9.75" Height="1.3658455403645746" />
         <EntityTypeShape EntityType="DbModel.ProjectAndUsers" Width="1.5" PointX="8.75" PointY="9.75" Height="2.659404296874996" />
-        <EntityTypeShape EntityType="DbModel.SubFunction" Width="1.5" PointX="10.75" PointY="0.75" Height="2.1050219726562602" />
         <EntityTypeShape EntityType="DbModel.tmp_documentGroupAndProject" Width="1.5" PointX="2.75" PointY="10.75" Height="1.3658455403645746" />
-        <EntityTypeShape EntityType="DbModel.UserAndFunction" Width="1.5" PointX="10.75" PointY="3.75" Height="1.9202278645833246" />
         <EntityTypeShape EntityType="DbModel.UserProfile" Width="1.5" PointX="10.75" PointY="6.75" Height="3.3985807291666674" />
         <EntityTypeShape EntityType="DbModel.WinbondGroupAndFuntion" Width="1.5" PointX="10.75" PointY="11.75" Height="1.7354337565104174" />
         <EntityTypeShape EntityType="DbModel.WinbondUserAndGroup" Width="1.5" PointX="12.75" PointY="0.75" Height="1.7354337565104174" />
@@ -1052,7 +1055,10 @@
         <EntityTypeShape EntityType="DbModel.WinbondUsers" Width="1.5" PointX="4.75" PointY="12.75" Height="1.5506396484374818" />
         <EntityTypeShape EntityType="DbModel.Project" Width="1.5" PointX="0.75" PointY="13.75" Height="2.4746101888020746" />
         <EntityTypeShape EntityType="DbModel.ProjectAndUsersView" Width="1.5" PointX="13.375" PointY="6.75" Height="2.8441984049479174" />
+        <EntityTypeShape EntityType="DbModel.MainFunction" Width="1.5" PointX="9.375" PointY="0.75" Height="1.7354337565104174" />
+        <EntityTypeShape EntityType="DbModel.SubFunction" Width="1.5" PointX="13.375" PointY="10.75" Height="2.2898160807291674" />
         <EntityTypeShape EntityType="DbModel.ProjectAndSubFunctionView" Width="1.5" PointX="7.375" PointY="13.75" Height="2.2898160807291674" />
+        <EntityTypeShape EntityType="DbModel.UserAndFunction" Width="1.5" PointX="9.375" PointY="14.75" Height="1.9202278645833246" />
       </Diagram>
     </Diagrams>
   </Designer>

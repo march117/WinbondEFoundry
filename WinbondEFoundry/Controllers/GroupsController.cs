@@ -7,7 +7,7 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using DbModel;
-using DbModel.Helper;
+using DbModel.Util;
 
 namespace WinbondEFoundry.Controllers
 {

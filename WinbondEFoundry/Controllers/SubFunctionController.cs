@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DbModel;
-using DbModel.Helper;
+using DbModel.Util;
 
 namespace WinbondEFoundry.Controllers
 {
@@ -16,7 +16,7 @@ namespace WinbondEFoundry.Controllers
         public ActionResult GetSubFunction(int MainFuncNo)
         {
             return Json(
-                DbHelper.GetList<SubFunction>(delegate(SubFunction model)
+                DataUtil.GetList<SubFunction>(delegate(SubFunction model)
                 {
                     return model.MainFunctionId == MainFuncNo;
                 })
@@ -27,7 +27,7 @@ namespace WinbondEFoundry.Controllers
         #endregion
         public override void ResourceToEditView()
         {
-            ViewBag.MainFunc = DbHelper.GetList<MainFunction>();
+            ViewBag.MainFunc = DataUtil.GetList<MainFunction>();
         }
 
         public override void ResourceToIndexView()

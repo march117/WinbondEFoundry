@@ -18,8 +18,8 @@ namespace DbModel
         public long SubFunctionId { get; set; }
         public string SubFunctionName { get; set; }
         public string ProjectName { get; set; }
-        public string UserEmail { get; set; }
         public long MainFunctionId { get; set; }
         public Nullable<long> ParentFunctionId { get; set; }
+        public long UserId { get; set; }
     }
 }

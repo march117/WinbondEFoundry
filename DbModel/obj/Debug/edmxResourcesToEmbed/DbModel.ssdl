@@ -31,9 +31,9 @@
       [ProjectAndSubFunctionView].[SubFunctionId] AS [SubFunctionId], 
       [ProjectAndSubFunctionView].[SubFunctionName] AS [SubFunctionName], 
       [ProjectAndSubFunctionView].[ProjectName] AS [ProjectName], 
-      [ProjectAndSubFunctionView].[UserEmail] AS [UserEmail], 
       [ProjectAndSubFunctionView].[MainFunctionId] AS [MainFunctionId], 
-      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId]
+      [ProjectAndSubFunctionView].[ParentFunctionId] AS [ParentFunctionId], 
+      [ProjectAndSubFunctionView].[UserId] AS [UserId]
       FROM [dbo].[ProjectAndSubFunctionView] AS [ProjectAndSubFunctionView]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="ProjectAndUsersView" EntityType="DbModel.Store.ProjectAndUsersView" store:Type="Views" store:Schema="dbo" store:Name="ProjectAndUsersView">
@@ -162,6 +162,7 @@
     <Property Name="FunctionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FunctionName" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="int" />
   </EntityType>
   <EntityType Name="NDAs">
     <Key>
@@ -232,6 +233,7 @@
     <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="int" />
   </EntityType>
   <EntityType Name="tmp_documentGroupAndProject">
     <Key>
@@ -244,12 +246,12 @@
   <EntityType Name="UserAndFunction">
     <Key>
       <PropertyRef Name="SubFuntionNo" />
-      <PropertyRef Name="UserEmail" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="SubFuntionNo" Type="bigint" Nullable="false" />
-    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
     <Property Name="ProjectNo" Type="varchar" MaxLength="100" />
-    <Property Name="CreaterEmail" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="Creater" Type="bigint" Nullable="false" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
   </EntityType>
   <EntityType Name="UserProfile">
@@ -317,16 +319,16 @@
       <PropertyRef Name="SubFunctionId" />
       <PropertyRef Name="SubFunctionName" />
       <PropertyRef Name="ProjectName" />
-      <PropertyRef Name="UserEmail" />
       <PropertyRef Name="MainFunctionId" />
+      <PropertyRef Name="UserId" />
     </Key>
     <Property Name="ProjectNo" Type="nvarchar" Nullable="false" MaxLength="11" />
     <Property Name="SubFunctionId" Type="bigint" Nullable="false" />
     <Property Name="SubFunctionName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="ProjectName" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="MainFunctionId" Type="bigint" Nullable="false" />
     <Property Name="ParentFunctionId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
   </EntityType>
   <!--產生期間發現錯誤:
       警告 6002: 資料表/檢視 'WinbondEFoundry.dbo.ProjectAndUsersView' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。

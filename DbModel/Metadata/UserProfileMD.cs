@@ -20,46 +20,46 @@ namespace DbModel
 
     public class UserProfileMD
     {
-        [DisplayName("使用者流水號"), Required, Key]
+        [DisplayName("Serial No"), Required, Key]
         public long UserId { get; set; }
 
         [DisplayName("Email"), Required, RegularExpression("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}")]
         public string UserEmail { get; set; }
 
-        [DisplayName("公司"), Required]
+        [DisplayName("Company"), Required]
         public long CompanyNo { get; set; }
 
-        [DisplayName("密碼"), Required,DataType(DataType.Password)]
+        [DisplayName("Password"), Required,DataType(DataType.Password)]
         public string UserPwd { get; set; }
 
-        [DisplayName("確認密碼"), Required,DataType(DataType.Password), Compare("UserPwd")]
+        [DisplayName("Confirm Password"), Required,DataType(DataType.Password), Compare("UserPwd")]
         public string CheckPw { get; set; }
 
-        [DisplayName("是否啟用"), Required]
+        [DisplayName("Activate"), Required]
         public bool IsActive { get; set; }
 
-        [DisplayName("建立者"), Required]
+        [DisplayName("Creator"), Required]
         public Nullable<long> Creater { get; set; }
 
-        [DisplayName("最後登入時間")]
+        [DisplayName("Last Login Date")]
         public Nullable<System.DateTime> LastLoginDate { get; set; }
 
-        [DisplayName("建立時間"), Required]
+        [DisplayName("Create Date"), Required]
         public Nullable<System.DateTime> CreateDate { get; set; }
 
-        [DisplayName("最後更新時間")]
+        [DisplayName("Last Update")]
         public Nullable<System.DateTime> LastUpdate { get; set; }
 
-        [DisplayName("分機號碼")]
+        [DisplayName("Extension")]
         public string ExtensinNo { get; set; }
 
-        [DisplayName("電話號碼"), Required]
+        [DisplayName("Phone Number"), Required]
         public string PhoneNo { get; set; }
 
-        [DisplayName("帳號過期時間")]
+        [DisplayName("Expire Date")]
         public Nullable<System.DateTime> ExpireDate { get; set; }
 
-        [DisplayName("狀態"), Required]
+        [DisplayName("Status"), Required]
         public string Status { get; set; }
     }
 }

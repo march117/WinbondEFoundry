@@ -113,15 +113,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="MainFunction">
-      <EntityTypeMapping TypeName="DbModel.MainFunction">
-        <MappingFragment StoreEntitySet="MainFunction">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
-          <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NDAs">
       <EntityTypeMapping TypeName="DbModel.NDAs">
         <MappingFragment StoreEntitySet="NDAs">
@@ -170,34 +161,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SubFunction">
-      <EntityTypeMapping TypeName="DbModel.SubFunction">
-        <MappingFragment StoreEntitySet="SubFunction">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
-          <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
-          <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
-          <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tmp_documentGroupAndProject">
       <EntityTypeMapping TypeName="DbModel.tmp_documentGroupAndProject">
         <MappingFragment StoreEntitySet="tmp_documentGroupAndProject">
           <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
           <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserAndFunction">
-      <EntityTypeMapping TypeName="DbModel.UserAndFunction">
-        <MappingFragment StoreEntitySet="UserAndFunction">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="CreaterEmail" ColumnName="CreaterEmail" />
-          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-          <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -289,16 +257,50 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MainFunction">
+      <EntityTypeMapping TypeName="DbModel.MainFunction">
+        <MappingFragment StoreEntitySet="MainFunction">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
+          <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubFunction">
+      <EntityTypeMapping TypeName="DbModel.SubFunction">
+        <MappingFragment StoreEntitySet="SubFunction">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
+          <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
+          <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
+          <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProjectAndSubFunctionView">
       <EntityTypeMapping TypeName="DbModel.ProjectAndSubFunctionView">
         <MappingFragment StoreEntitySet="ProjectAndSubFunctionView">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ParentFunctionId" ColumnName="ParentFunctionId" />
           <ScalarProperty Name="MainFunctionId" ColumnName="MainFunctionId" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
           <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
           <ScalarProperty Name="SubFunctionName" ColumnName="SubFunctionName" />
           <ScalarProperty Name="SubFunctionId" ColumnName="SubFunctionId" />
           <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserAndFunction">
+      <EntityTypeMapping TypeName="DbModel.UserAndFunction">
+        <MappingFragment StoreEntitySet="UserAndFunction">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Creater" ColumnName="Creater" />
+          <ScalarProperty Name="ProjectNo" ColumnName="ProjectNo" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SubFuntionNo" ColumnName="SubFuntionNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

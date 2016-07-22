@@ -14,31 +14,32 @@ namespace DbModel
 
     public class ProjectAndUsersMD
     {
-        [DisplayName("流水號"),Key]
+        [DisplayName("Serial No"),Key]
         public long PAUId { get; set; }
         
-        [DisplayName("使用者")]
+        [DisplayName("User")]
         public long UserId { get; set; }
 
-        [DisplayName("專案")]
+        [DisplayName("Project")]
         public string ProjectId { get; set; }
 
-        [DisplayName("建立時間")]
+        [DisplayName("Create Date")]
         public Nullable<System.DateTime> CreateDate { get; set; }
 
-        [DisplayName("最後更新時間")]
+        [DisplayName("Last Update Date")]
         public Nullable<System.DateTime> LastUpdate { get; set; }
 
-        [DisplayName("是否為專案管理者")]
+        [DisplayName("Is Admin")]
         public bool IsAdmin { get; set; }
 
-        [DisplayName("專案狀況")]
+        [DisplayName("In Project Status")]
         public string InProjectStatus { get; set; }
 
-        [DisplayName("開始時間")]
+        [DataType(DataType.Date)]
+        [DisplayName("Start Date"), DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public System.DateTime StartDate { get; set; }
 
-        [DisplayName("結束時間")]
+        [DisplayName("End Date"), DisplayFormat(DataFormatString = "yyyy/MM/dd")]
         public System.DateTime EndDate { get; set; }
     }
 }

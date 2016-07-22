@@ -4,18 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DbModel;
-using DbModel.Helper;
+using DbModel.Util;
 
 namespace WinbondEFoundry.Controllers
 {
-    [Authorize]
-    public abstract class BaseController<T> : Controller where T: class
+    public abstract class BaseController<T> : AuthorizeController where T: class
     {
         // GET: /Groups/
         public ActionResult Index()
         {
             ResourceToIndexView();
-            return View(DbHelper.GetList<T>());
+            return View(DataUtil.GetList<T>());
         }
 
         public ActionResult Create()
@@ -30,7 +29,7 @@ namespace WinbondEFoundry.Controllers
             ViewBag.IsValid = ModelState.IsValid;
             if (ModelState.IsValid)
             {
-                DbHelper.Insert<T>(g);
+                DataUtil.Insert<T>(g);
                 return RedirectToAction("Index");
             }
             else
@@ -43,7 +42,7 @@ namespace WinbondEFoundry.Controllers
 
         public ActionResult Edit(string id)
         {
-            T g = DbHelper.GetItem<T>(id);
+            T g = DataUtil.GetItem<T>(id);
             ResourceToEditView();
             return View(g);
         }
@@ -54,7 +53,7 @@ namespace WinbondEFoundry.Controllers
             if (ModelState.IsValid)
             {
                 
-                DbHelper.Update<T>(g);
+                DataUtil.Update<T>(g);
             }            
             ResourceToEditView();
             return View(g);
@@ -63,7 +62,7 @@ namespace WinbondEFoundry.Controllers
         [HttpPost]
         public ActionResult DeleteItem(string[] id)
         {
-            DbHelper.Delete<T>(id);
+            DataUtil.Delete<T>(id);
             return RedirectToAction("Index");
         }
 

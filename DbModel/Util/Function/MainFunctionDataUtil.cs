@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DbModel.Util;
 
-namespace DbModel.Helper.Function
+namespace DbModel.Util.Function
 {
-    public class MainFunctionHelper
+    public class MainFunctionDataUtil
     {
         private static List<MainFunction> _mfList;
-        private static MainFunctionHelper _instance;
+        private static MainFunctionDataUtil _instance;
         private static object _sync = new object();
         /// <summary>
         /// 取得Helper物件
         /// </summary>
         /// <returns></returns>
-        public static MainFunctionHelper Instance()
+        public static MainFunctionDataUtil Instance()
         {            
             //Singelton
             if (_instance == null)
@@ -23,7 +24,7 @@ namespace DbModel.Helper.Function
                 {
                     if (_instance == null)
                     {
-                        _instance = new MainFunctionHelper();
+                        _instance = new MainFunctionDataUtil();
                     }                    
                 }
                 
@@ -56,7 +57,9 @@ namespace DbModel.Helper.Function
 
         private void GetMainFunction()
         {
-            _mfList = DbHelper.GetList<MainFunction>();
+            _mfList = DataUtil.GetList<MainFunction>()
+                        .OrderBy(o=>o.Sort)
+                        .ToList();
         }
     }
 }

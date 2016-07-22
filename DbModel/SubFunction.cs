@@ -20,5 +20,6 @@ namespace DbModel
         public string SubFunctionName { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> Sort { get; set; }
     }
 }

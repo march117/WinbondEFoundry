@@ -41,8 +41,6 @@
         $("#loginForm").submit();
     }
 </script>
-@ViewBag.isLogin
-@ViewBag.UserProfile
 <form action="@Url.Action("Index")" method="post" id="loginForm" class="form-horizontal well">
     @Html.AntiForgeryToken()
     <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]"/>

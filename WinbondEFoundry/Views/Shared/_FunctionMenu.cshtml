@@ -7,28 +7,60 @@
         List<MainFunction> mainFuncList = ViewBag.MainFunction;
         UserProfileVM uVM = ViewBag.UserProfile;
         List<SubFunctionVM> subFuncList = uVM.SubFunctionList;
-        <nav class="navbar navbar-inverse">
+        List<AdminFunctionVM> adminFuncList = uVM.AdminFunctionList;
+        <nav class="navbar navbar-inverse" role="navigation">
             <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Brand</a>
+                </div>
                 <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                         @foreach (MainFunction mainFunc in mainFuncList)
                         {
-                            bool hasChildren = subFuncList.Any(o => o.MainFunctionId == mainFunc.FunctionId);
+                            bool hasChildren = false;
+                            if (mainFunc.FunctionId != 3)
+                            {
+                                hasChildren = subFuncList != null && subFuncList.Any(o => o.MainFunctionId == mainFunc.FunctionId);
+                            }
+                            else
+                            {
+                                hasChildren = adminFuncList != null;
+                            }
+                            
                             <li @(hasChildren?"class=\"dropdown\"":"")>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">@mainFunc.FunctionName <span class="caret"></span></a>
                             
                             @if (hasChildren)
                             {
-                                <ul class="dropdown-menu" aria-labelledby="themes">
-                                    @foreach (SubFunctionVM subFunc in subFuncList.Where(o => o.MainFunctionId == mainFunc.FunctionId))
-                                    {
-                                        <li><a href="javascript:;">@subFunc.SubFunctionName</a></li>   
-                                    }
-                                </ul>
+                                if (mainFunc.FunctionId != 3)
+                                {
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        @foreach (SubFunctionVM subFunc in subFuncList.Where(o => o.MainFunctionId == mainFunc.FunctionId))
+                                        {
+                                            <li><a href="javascript:;">@subFunc.SubFunctionName</a></li>   
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <ul class="dropdown-menu" aria-labelledby="themes">
+                                        @foreach (AdminFunctionVM afc in adminFuncList)
+                                        {
+                                            <li><a href="@afc.Url">@afc.SubFunctionName</a></li>   
+                                        }
+                                    </ul>
+                                }
+
                             }
                             </li>
                         }
-                        <li><a href="@Url.Action("Logout","Login")" style="float:right">Logout</a></li>
+                        <li><a href="@Url.Action("Logout", "Login")" class="pull-right">Logout</a></li>
                     </ul>
                 </div>
             </div>

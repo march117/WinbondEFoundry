@@ -17,5 +17,6 @@ namespace DbModel
         public long FunctionId { get; set; }
         public string FunctionName { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> Sort { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DbModel;
-using DbModel.Helper;
+using DbModel.Util;
 
 namespace WinbondEFoundry.Controllers
 {
@@ -13,7 +13,7 @@ namespace WinbondEFoundry.Controllers
 
         public override void ResourceToEditView()
         {
-            ViewBag.CompanyList = DbHelper.GetList<CompanyProfile>();
+            ViewBag.CompanyList = DataUtil.GetList<CompanyProfile>();
         }
 
         public override void ResourceToIndexView()

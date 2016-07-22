@@ -15,9 +15,9 @@ namespace DbModel
     public partial class UserAndFunction
     {
         public long SubFuntionNo { get; set; }
-        public string UserEmail { get; set; }
+        public long UserId { get; set; }
         public string ProjectNo { get; set; }
-        public string CreaterEmail { get; set; }
+        public long Creater { get; set; }
         public string Status { get; set; }
     }
 }

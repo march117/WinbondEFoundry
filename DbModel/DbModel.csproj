@@ -91,9 +91,6 @@
     <Compile Include="Groups.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Helper\DbHelper.cs" />
-    <Compile Include="Helper\Function\MainFunctionHelper.cs" />
-    <Compile Include="Helper\Project\ProjectDataHelper.cs" />
     <Compile Include="MainFunction.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -139,9 +136,15 @@
     <Compile Include="UserProfile.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Util\DataUtil.cs" />
+    <Compile Include="Util\Function\AdminFunctionDataUtil.cs" />
+    <Compile Include="Util\Function\MainFunctionDataUtil.cs" />
+    <Compile Include="Util\Project\ProjectDataUtil.cs" />
     <Compile Include="Util\SecureUtil.cs" />
+    <Compile Include="Util\User\UserDataUtil.cs" />
     <Compile Include="ViewModel\Login\LoginVM.cs" />
     <Compile Include="ViewModel\Project\ProjectAndUsersVM.cs" />
+    <Compile Include="ViewModel\SubFunction\AdminFunctionVM.cs" />
     <Compile Include="ViewModel\SubFunction\SubFunctionVM.cs" />
     <Compile Include="ViewModel\User\UserAndFunctionVM.cs" />
     <Compile Include="ViewModel\User\UserProfileVM.cs" />

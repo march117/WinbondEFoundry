@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DbModel;
-using DbModel.Helper;
+using DbModel.Util;
 using DbModel.ViewModel.Login;
 using Library.Login;
 using System.Web.Security;
+using DbModel.Util.User;
 
 namespace WinbondEFoundry.Controllers
 {
@@ -28,6 +29,7 @@ namespace WinbondEFoundry.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Remove(UserDataUtil.SessionKey);
             return RedirectToAction("Index");
         }
 
@@ -42,7 +44,7 @@ namespace WinbondEFoundry.Controllers
             LoginHelper lh = new LoginHelper(lv);
             if (lh.Login())
             {
-                List<ProjectAndUsersView> projects = DbHelper.GetList<ProjectAndUsersView>(delegate(ProjectAndUsersView pauv)
+                List<ProjectAndUsersView> projects = DataUtil.GetList<ProjectAndUsersView>(delegate(ProjectAndUsersView pauv)
                 {
                     return pauv.UserId == lh.User().UserId;
                 });
@@ -69,7 +71,7 @@ namespace WinbondEFoundry.Controllers
                 {
                     string encrypt = lh.GetEncrptyTicket();                    
                     Response.AppendCookie(new HttpCookie(FormsAuthentication.FormsCookieName,encrypt));
-                   
+                    Session.Add(UserDataUtil.SessionKey, lh.UserViewModel());
                     //Return Url
                     string rURL = Request.QueryString["ReturnUrl"];
                     if (!string.IsNullOrEmpty(lv.ReturnUrl))
@@ -77,9 +79,6 @@ namespace WinbondEFoundry.Controllers
                         return Redirect(lv.ReturnUrl);
                     }
                 }
-                ViewBag.isLogin = lh.Login();
-
-                
             }            
             return View();
         }
